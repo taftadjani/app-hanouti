@@ -1,0 +1,217 @@
+/* Start of hero  */
+
+.app-hanouti .hero {
+    width: 100%;
+    height: 45rem;
+    overflow: hidden;
+    margin-top: 1.6rem;
+    border-radius: .5rem;
+    -webkit-border-radius: .5rem;
+    -moz-border-radius: .5rem;
+    -ms-border-radius: .5rem;
+    -o-border-radius: .5rem;
+    background-color: red;
+}
+
+.hero .caroussel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+
+/* Start of slider  */
+
+.caroussel .slider {
+    width: 100%;
+    height: 100%;
+}
+
+.slider .slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    transition: all 1000ms ease;
+    -webkit-transition: all 1000ms ease;
+    -moz-transition: all 1000ms ease;
+    -ms-transition: all 1000ms ease;
+    -o-transition: all 1000ms ease;
+}
+
+.slider .slide:nth-child(1) {
+    background-color: tomato;
+}
+
+.slider .slide:nth-child(2) {
+    background-color: aqua;
+}
+
+.slider .slide:nth-child(3) {
+    background-color: cadetblue;
+}
+
+.slider .slide:nth-child(4) {
+    background-color: darkcyan;
+}
+
+.slider .slide:nth-child(5) {
+    background-color: darkseagreen;
+}
+
+
+/* End of slider  */
+
+
+/* Start of controls */
+
+.caroussel .controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    pointer-events: none;
+    justify-content: space-between;
+    position: absolute;
+    top: 50%;
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+    transform: translate(0, -50%);
+    -webkit-transform: translate(0, -50%);
+    -moz-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    -o-transform: translate(0, -50%);
+}
+
+.controls .arrow-parent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    pointer-events: all;
+    background-color: transparent;
+    width: 20%;
+    height: 100%;
+    padding: 2rem;
+}
+
+.controls .arrow-parent:nth-child(1) {
+    justify-content: flex-start;
+}
+
+.controls .arrow-parent:nth-child(2) {
+    justify-content: flex-end;
+}
+
+.controls .arrow-parent:nth-child(1) .arrow {
+    transform: translate(-160%);
+    -webkit-transform: translate(-160%);
+    -moz-transform: translate(-160%);
+    -ms-transform: translate(-160%);
+    -o-transform: translate(-160%);
+}
+
+.controls .arrow-parent:nth-child(2) .arrow {
+    transform: translate(160%);
+    -webkit-transform: translate(160%);
+    -moz-transform: translate(160%);
+    -ms-transform: translate(160%);
+    -o-transform: translate(160%);
+}
+
+.controls .arrow-parent:hover>.arrow {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(0%);
+    -webkit-transform: translate(0%);
+    -moz-transform: translate(0%);
+    -ms-transform: translate(0%);
+    -o-transform: translate(0%);
+}
+
+.arrow-parent .arrow {
+    pointer-events: all;
+    cursor: pointer;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    width: 3rem;
+    height: 3rem;
+    border-radius: .2rem;
+    background-color: rgba(0, 0, 0, .3);
+    -webkit-border-radius: .2rem;
+    -moz-border-radius: .2rem;
+    -ms-border-radius: .2rem;
+    -o-border-radius: .2rem;
+    transition: all 500ms ease;
+    -webkit-transition: all 500ms ease;
+    -moz-transition: all 500ms ease;
+    -ms-transition: all 500ms ease;
+    -o-transition: all 500ms ease;
+}
+
+.arrow-parent .arrow:hover {
+    background-color: rgba(0, 0, 0, .4);
+}
+
+
+/* End of controls */
+
+
+/* Start of selectors */
+
+.caroussel .selectors {
+    pointer-events: none;
+    position: absolute;
+    margin-bottom: 1.5rem;
+    width: 100%;
+    bottom: 0;
+    z-index: 50;
+}
+
+.selectors ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-right: 7rem;
+}
+
+.selectors .selector {
+    pointer-events: all;
+    cursor: pointer;
+    margin: 1.5rem .5rem;
+    width: .9rem;
+    height: .9rem;
+    background-color: var(--color-black-light);
+    border-radius: .5rem;
+    -webkit-border-radius: .5rem;
+    -moz-border-radius: .5rem;
+    -ms-border-radius: .5rem;
+    -o-border-radius: .5rem;
+    transition: all 500ms ease;
+    -webkit-transition: all 500ms ease;
+    -moz-transition: all 500ms ease;
+    -ms-transition: all 500ms ease;
+    -o-transition: all 500ms ease;
+}
+
+.selectors .selector.active {
+    width: 3rem !important;
+    /* margin: .5rem 1rem !important; */
+    background-color: var(--color-orange-primary) !important;
+}
+
+
+/* End of selectors */
+
+
+/* End of hero  */

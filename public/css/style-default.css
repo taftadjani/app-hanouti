@@ -1,0 +1,465 @@
+/**
+** Box sizing : border-box
+** overflow : hidden
+** padding : 0
+** margin : 0
+** font-size : 10px(62.5%) and use rem(try the function here)
+** font-family :
+* min-width : 320px Use of media query
+* max-width : 1170px
+** universal selectors
+*/
+
+:root {
+    --color-white-primary: #fff;
+    --color-white-light: #F6F5F7;
+    --color-black-primary: #363636;
+    --color-black-light: #ccc;
+    --color-grey-primary: #eee;
+    --color-orange-primary: #ff8409;
+    --color-red-error: #f00;
+    --color-green-success: #3cb371;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    outline: none;
+}
+
+html {
+    font-family: 'Montserrat', 'Poppins', Roboto, sans-serif;
+    font-size: 62.5%;
+    max-width: 100%;
+}
+
+body {
+    font-size: 1.6rem;
+    width: 100%;
+    /* min-height: 100vh; */
+    overflow-x: hidden;
+    background-color: var(--color-white-light);
+}
+
+body::-webkit-scrollbar {
+    width: 1rem;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: linear-gradient(transparent, var(--color-orange-primary));
+    border-radius: .5rem;
+    -webkit-border-radius: .5rem;
+    -moz-border-radius: .5rem;
+    -ms-border-radius: .5rem;
+    -o-border-radius: .5rem;
+}
+
+body::-moz-scrollbar {
+    width: 1rem;
+}
+
+body::-moz-scrollbar-thumb {
+    background: linear-gradient(transparent, var(--color-orange-primary));
+    border-radius: .5rem;
+    -webkit-border-radius: .5rem;
+    -moz-border-radius: .5rem;
+    -ms-border-radius: .5rem;
+    -o-border-radius: .5rem;
+}
+
+.app-hanouti {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--color-white-light);
+    color: var(--color-black-primary);
+}
+
+a {
+    color: var(--color-black-primary);
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+.app-hanouti .container {
+    max-width: 117rem;
+    width: 90%;
+    margin: 0 auto;
+}
+
+
+/* Start of top title 1 */
+
+.top-title-1 {
+    display: flex;
+    padding: 2.5rem 0 0 0;
+}
+
+.top-title-1 h3 {
+    display: flex;
+    align-items: center;
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+
+/* End of top title 1 */
+
+
+/* Start of top title 2 */
+
+.top-title-2 {
+    display: flex;
+    justify-content: space-between;
+    padding: 2.5rem 0 0 0;
+}
+
+.top-title-2 h3 {
+    display: flex;
+    align-items: center;
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+
+/* End of top title 2 */
+
+
+/* Start of top title 4 */
+
+.top-title-4 {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    padding: 2.5rem 0 0 0;
+    margin-bottom: 2rem;
+}
+
+.top-title-4 h3 {
+    display: block;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+
+/* End of top title 3 */
+
+
+/* Start of top title 3 */
+
+.top-title-3 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2.5rem 0 0 0;
+}
+
+.top-title-3 h3 {
+    display: flex;
+    align-items: center;
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+.top-title-3 .time-chrono {
+    font-size: 2.4rem;
+    font-weight: 500;
+    color: var(--color-red-error);
+    letter-spacing: 1px;
+}
+
+
+/* End of top title 3 */
+
+
+/* Start center title */
+
+.center-title {
+    display: flex;
+    justify-content: center;
+    padding: 4rem 0 1rem 0;
+}
+
+.center-title h3 {
+    display: flex;
+    align-items: center;
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+
+/* End center title */
+
+
+/* Start of show all button */
+
+.show-all {
+    cursor: pointer;
+    display: block;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.6rem;
+    letter-spacing: 1.2px;
+    padding: 1rem 0 !important;
+    color: var(--color-black-primary);
+    background-color: transparent;
+    border: 1px solid var(--color-black-light);
+    outline: none;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    transition: all 300ms ease;
+    -webkit-transition: all 300ms ease;
+    -moz-transition: all 300ms ease;
+    -ms-transition: all 300ms ease;
+    -o-transition: all 300ms ease;
+}
+
+.show-all span {
+    pointer-events: none;
+    font-size: 1.6rem;
+    margin: 0 1rem;
+}
+
+.show-all:hover {
+    color: var(--color-orange-primary);
+    border-color: var(--color-orange-primary);
+}
+
+.show-all:active {
+    transform: scale(.95);
+    -webkit-transform: scale(.95);
+    -moz-transform: scale(.95);
+    -ms-transform: scale(.95);
+    -o-transform: scale(.95);
+}
+
+.show-all div {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+/* End of show all button */
+
+
+/* Start of show more button */
+
+button.show-more {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.6rem;
+    letter-spacing: 1.2px;
+    padding: 1rem 2rem;
+    color: var(--color-black-primary);
+    background-color: transparent;
+    border: 1px solid var(--color-black-light);
+    outline: none;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    transition: all 300ms ease;
+    -webkit-transition: all 300ms ease;
+    -moz-transition: all 300ms ease;
+    -ms-transition: all 300ms ease;
+    -o-transition: all 300ms ease;
+}
+
+button.show-more i {
+    font-size: 2rem;
+    margin-left: 2rem;
+    transition: all 300ms ease;
+    -webkit-transition: all 300ms ease;
+    -moz-transition: all 300ms ease;
+    -ms-transition: all 300ms ease;
+    -o-transition: all 300ms ease;
+    transform: rotate(150deg);
+    -webkit-transform: rotate(150deg);
+    -moz-transform: rotate(150deg);
+    -ms-transform: rotate(150deg);
+    -o-transform: rotate(150deg);
+}
+
+button.show-more:hover {
+    color: var(--color-orange-primary);
+    border-color: var(--color-orange-primary);
+}
+
+button.show-more:hover i {
+    transform: rotate(200deg);
+    -webkit-transform: rotate(200deg);
+    -moz-transform: rotate(200deg);
+    -ms-transform: rotate(200deg);
+    -o-transform: rotate(200deg);
+}
+
+
+/* End of show more button */
+
+µ
+/* Start of the Product cart */
+
+.app-hanouti .products-cart {
+    margin: 5rem 0;
+}
+
+.products-cart .products-container {
+    margin-top: 3rem;
+}
+
+.products-cart .products-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+    gap: 2.4rem 1.5rem;
+    justify-content: center;
+}
+
+.products-container .product-container {
+    transition: all 300ms ease;
+    -webkit-transition: all 300ms ease;
+    -moz-transition: all 300ms ease;
+    -ms-transition: all 300ms ease;
+    -o-transition: all 300ms ease;
+}
+
+.products-container .product-container:hover {
+    transform: scale(1.05);
+    -webkit-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    -o-transform: scale(1.05);
+}
+
+.product-container .product-img {
+    pointer-events: none;
+    background-color: transparent;
+    width: 100%;
+    height: 222px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-container .product-img img {
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+}
+
+.product-container .product-details {
+    background-color: var(--color-white-primary);
+    height: 100px;
+    width: 100%;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.product-container .product-details .product-name {
+    padding: 1rem 1rem 0 1rem;
+    font-size: 1.8rem;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+.product-container .product-details .product-price {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.product-container .product-details .product-price span {
+    margin: 0 .5rem;
+}
+
+.product-container .product-details .product-price span.off-price {
+    display: none;
+}
+
+.product-container .product-details .product-price.off span.off-price {
+    display: inline;
+}
+
+.product-container .product-details .product-price.off span.real-price {
+    color: var(--color-black-light);
+    text-decoration: line-through;
+    font-weight: 500;
+}
+
+
+/* End of the Product cart */
+
+
+/* Start of Product cart bottom  */
+
+.products-cart .bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 3rem;
+}
+
+.products-cart .bottom button {
+    font-size: 1.6rem;
+    font-weight: 500;
+    width: max-content;
+}
+
+
+/* End of Product cart bottom  */
+
+
+/* Start of no selectable text */
+
+.no-selectable-text {
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+    supported by Chrome, Edge, Opera and Firefox */
+}
+
+
+/* End of no selectable text */

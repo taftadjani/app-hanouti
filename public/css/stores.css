@@ -1,0 +1,39 @@
+.app-hanouti .center-content {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+
+/* Store start */
+
+.center-content .store-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-black-light);
+    text-align: center;
+    font-weight: 500;
+    font-size: 2rem;
+    line-height: 3rem;
+    width: 26rem;
+    padding: 1.2rem 1rem;
+    margin: 1rem;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    transition: all 300ms ease;
+    -webkit-transition: all 300ms ease;
+    -moz-transition: all 300ms ease;
+    -ms-transition: all 300ms ease;
+    -o-transition: all 300ms ease;
+}
+
+.center-content .store-link:hover {
+    border-color: var(--color-orange-primary);
+}
+
+
+/* End start */

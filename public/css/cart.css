@@ -1,0 +1,183 @@
+.carts-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.carts-wrapper .cart-titles {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.carts-wrapper .cart-titles .cart-title {
+    margin: 0 1rem;
+}
+
+.carts-wrapper .cart-titles .cart-title a {
+    font-size: 2.5rem;
+    font-weight: 500;
+    color: var(--color-black-primary);
+}
+
+.carts-wrapper .cart-titles .cart-title.active a {
+    cursor: default;
+    font-weight: 600;
+    font-size: 3rem;
+    color: var(--color-orange-primary);
+}
+
+.carts-wrapper .cart-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.carts-wrapper .cart-content .cart-detail {
+    display: grid;
+    grid-template-columns: 15rem 1fr;
+    gap: 2rem;
+    height: 15rem;
+    margin-bottom: 2rem;
+}
+
+.carts-wrapper .cart-content .cart-detail .img-container {
+    height: 100%;
+    width: 15rem;
+    background-color: red;
+    border-radius: .5rem;
+    overflow: hidden;
+}
+
+.carts-wrapper .cart-content .cart-detail .img-container img {
+    width: 100%;
+    height: 100%;
+}
+
+.carts-wrapper .cart-content .cart-detail .details-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.carts-wrapper .cart-content .cart-detail .details-container .left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 2.2rem;
+    font-weight: 500;
+}
+
+.carts-wrapper .cart-content .cart-detail .details-container .left .product-name a {
+    transition: all 200ms linear;
+}
+
+.carts-wrapper .cart-content .cart-detail .details-container .left .product-name a:hover {
+    color: var(--color-orange-primary);
+}
+
+.carts-wrapper .cart-content .cart-detail .details-container .left .price {
+    font-size: 2.5rem;
+    margin-top: 2rem;
+    font-weight: 600;
+    color: var(--color-orange-primary);
+}
+
+.carts-wrapper .cart-content .cart-detail .details-container .left button {
+    cursor: pointer;
+    font-size: 1.6rem;
+    background-color: transparent;
+    border: none;
+    transition: all 200ms linear;
+}
+
+.carts-wrapper .cart-content .cart-detail .details-container .left button:hover {
+    color: var(--color-red-error);
+}
+
+.carts-wrapper .cart-content .cart-detail .details-container .right form {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.carts-wrapper .cart-content .cart-detail .details-container .right form .quantity {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.carts-wrapper .cart-content .cart-detail .details-container .right form .quantity input {
+    height: 4rem;
+    padding: 1rem;
+    margin: 1rem 0;
+    font-size: 2rem;
+    text-align: end;
+    border: none;
+    outline: none;
+    border-radius: .5rem;
+}
+
+.carts-wrapper .cart-content .cart-detail .details-container .right form .quantity button {
+    background-color: transparent;
+    border: none;
+}
+
+.carts-wrapper .cart-content .cart-detail .details-container .right form .quantity button.deactivated {
+    pointer-events: none;
+    color: var(--color-black-light);
+}
+
+.carts-wrapper .cart-content .cart-detail .details-container .right form .quantity button span {
+    pointer-events: none;
+}
+
+.carts-wrapper .cart-content .cart-detail .details-container .right form .unit {
+    margin-left: 2rem;
+    font-size: 2rem;
+}
+
+.carts-wrapper .cart-content .actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.carts-wrapper .cart-content .actions a {
+    margin-left: 2rem;
+    border: 2px solid var(--color-black-primary);
+    padding: 1rem 2rem;
+    border-radius: .5rem;
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--color-black-primary);
+    transition: all 200ms linear;
+}
+
+.carts-wrapper .cart-content .actions a.clear {
+    border-color: var(--color-red-error);
+    color: var(--color-red-error);
+}
+
+.carts-wrapper .cart-content .actions a.order {
+    border-color: var(--color-orange-primary);
+    color: var(--color-white-primary);
+    background-color: var(--color-orange-primary);
+}
+
+.carts-wrapper .cart-content .actions a:active {
+    transform: scale(.95);
+}
+
+.carts-wrapper .cart-content .no-product-cart {
+    font-size: 2.5rem;
+    margin: 2rem;
+    text-align: center;
+    font-weight: 400;
+}

@@ -1,0 +1,568 @@
+/* Start of footer  */
+
+.app-hanouti footer {
+    background-color: var(--color-white-primary);
+    position: relative;
+    width: 100%;
+    bottom: 0;
+    margin: 2rem 0 0 0;
+}
+
+
+/* Start of footer top  */
+
+
+/* Start of logo */
+
+footer .footer-top {
+    min-height: 14rem;
+    height: 14rem;
+    background-color: var(--color-white-primary);
+    box-shadow: 1px 0px 1px var(--color-black-light);
+    margin: 1px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-top .container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.footer-top .logo {
+    display: flex;
+    align-items: center;
+}
+
+.footer-top .shopping_cart {
+    font-size: 4rem;
+    width: 4rem;
+    height: 4rem;
+    color: var(--color-orange-primary);
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+}
+
+.footer-top .logo-text {
+    font-family: 'Cunia';
+    font-size: 3rem;
+    margin-left: .5rem;
+}
+
+
+/* End of logo */
+
+
+/* Start of subscribe */
+
+.footer-top .subscribe form,
+.footer-top .subscribe {
+    position: relative;
+    overflow: hidden;
+    width: 40rem;
+    height: 5rem;
+}
+
+.subscribe .subscribe-input {
+    width: 100%;
+    height: 100%;
+    padding-top: 2rem;
+    border: none;
+    outline: none;
+}
+
+.subscribe label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    border-bottom: 1px solid rgba(0, 0, 0, .5);
+}
+
+.subscribe .content-name {
+    position: absolute;
+    bottom: 5px;
+    left: 0px;
+    color: rgba(0, 0, 0, .5);
+    font-size: 1rem;
+    letter-spacing: .5px;
+    transition: all 300ms ease;
+    -webkit-transition: all 300ms ease;
+    -moz-transition: all 300ms ease;
+    -ms-transition: all 300ms ease;
+    -o-transition: all 300ms ease;
+}
+
+.subscribe .subscribe-input:focus+label,
+.subscribe .subscribe-input:valid+label {
+    border-bottom: 1px solid var(--color-black-primary);
+}
+
+.subscribe .subscribe-input:focus+label .content-name,
+.subscribe .subscribe-input:valid+label .content-name {
+    font-size: 1.1rem;
+    color: var(--color-black-primary);
+    transform: translateY(-150%);
+    -webkit-transform: translateY(-150%);
+    -moz-transform: translateY(-150%);
+    -ms-transform: translateY(-150%);
+    -o-transform: translateY(-150%);
+}
+
+.subscribe .subscribe-link {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    transition: all 400ms ease;
+    -webkit-transition: all 400ms ease;
+    -moz-transition: all 400ms ease;
+    -ms-transition: all 400ms ease;
+    -o-transition: all 400ms ease;
+}
+
+.subscribe-link i {
+    color: rgba(0, 0, 0, .5);
+    font-size: 2rem;
+    transition: all 300ms ease;
+    -webkit-transition: all 300ms ease;
+    -moz-transition: all 300ms ease;
+    -ms-transition: all 300ms ease;
+    -o-transition: all 300ms ease;
+}
+
+.subscribe .subscribe-input:focus+label+.subscribe-link i,
+.subscribe .subscribe-input:valid+label+.subscribe-link i {
+    color: var(--color-orange-primary);
+}
+
+#subscribe-link i {
+    pointer-events: none;
+}
+
+
+/* End of subscribe */
+
+
+/* End of footer top  */
+
+
+/* Start of footer center  */
+
+footer .footer-center {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(27rem, 1fr));
+    gap: 1rem 1rem;
+    margin-top: 5rem;
+    margin-bottom: 11rem;
+    background-color: var(--color-white-primary);
+}
+
+.footer-center .section {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-start;
+}
+
+.section h1 {
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: var(--color-black-primary);
+    margin-bottom: 3rem;
+}
+
+.section a {
+    color: var(--color-black-primary);
+    margin-bottom: 1.2rem;
+    font-size: 1.6rem;
+    letter-spacing: .6px;
+    transition: color 300ms ease;
+    -webkit-transition: color 300ms ease;
+    -moz-transition: color 300ms ease;
+    -ms-transition: color 300ms ease;
+    -o-transition: color 300ms ease;
+}
+
+.section a:hover {
+    color: var(--color-orange-primary);
+}
+
+
+/* End of footer center  */
+
+
+/* Start of footer bottom */
+
+footer .footer-bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-top: 1px solid rgba(0, 0, 0, .2);
+    padding: 3rem 0;
+    height: 10rem;
+}
+
+.footer-bottom .social-media {
+    display: flex;
+    flex-direction: row;
+}
+
+.footer-bottom .media {
+    margin-right: 2rem;
+}
+
+.footer-bottom .media a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 4rem;
+    height: 4rem;
+    border: 1.5px solid rgba(0, 0, 0, .2);
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    transition: all 300ms ease;
+    -webkit-transition: all 300ms ease;
+    -moz-transition: all 300ms ease;
+    -ms-transition: all 300ms ease;
+    -o-transition: all 300ms ease;
+}
+
+.footer-bottom .media path {
+    transition: all 300ms ease;
+    -webkit-transition: all 300ms ease;
+    -moz-transition: all 300ms ease;
+    -ms-transition: all 300ms ease;
+    -o-transition: all 300ms ease;
+}
+
+
+/* Facebook start */
+
+#facebook {
+    width: 3rem;
+}
+
+#facebook circle {
+    fill: none;
+}
+
+#facebook path {
+    fill: var(--color-black-primary);
+    opacity: .8;
+}
+
+.footer-bottom .media a:hover #facebook path {
+    fill: #3B5998;
+    opacity: 1;
+}
+
+.footer-bottom .media a.facebook:hover {
+    border: 1.5px solid #3B5998;
+}
+
+
+/* Facebook End */
+
+
+/* Start of pinterest */
+
+#pinterest {
+    width: 3rem;
+}
+
+#pinterest circle {
+    fill: none;
+}
+
+#pinterest path {
+    fill: var(--color-black-primary);
+    opacity: .8;
+}
+
+.footer-bottom .media a:hover #pinterest path {
+    fill: #CB2027;
+    opacity: 1;
+}
+
+.footer-bottom .media a.pinterest:hover {
+    border: 1.5px solid #CB2027;
+}
+
+
+/* End of pinterest */
+
+
+/* Start of google */
+
+#google {
+    width: 3rem;
+}
+
+#google circle {
+    fill: none;
+}
+
+#google path {
+    fill: var(--color-black-primary);
+    opacity: .8;
+}
+
+.footer-bottom .media a:hover #google path {
+    fill: #DC4E41;
+    opacity: 1;
+}
+
+.footer-bottom .media a.google:hover {
+    border: 1.5px solid #DC4E41;
+}
+
+
+/* End of google */
+
+
+/* Start of linkedIn */
+
+#linkedIn {
+    width: 3rem;
+}
+
+#linkedIn circle {
+    fill: none;
+}
+
+#linkedIn path {
+    fill: var(--color-black-primary);
+    opacity: .8;
+}
+
+.footer-bottom .media a:hover #linkedIn path {
+    fill: #007AB9;
+    opacity: 1;
+}
+
+.footer-bottom .media a.linkedIn:hover {
+    border: 1.5px solid #007AB9;
+}
+
+
+/* End of linkedIn */
+
+
+/* Start of twitter */
+
+#twitter {
+    width: 3rem;
+}
+
+#twitter circle {
+    fill: none;
+}
+
+#twitter path {
+    fill: var(--color-black-primary);
+    opacity: .8;
+}
+
+.footer-bottom .media a:hover #twitter path {
+    fill: #55ACEE;
+    opacity: 1;
+}
+
+.footer-bottom .media a.twitter:hover {
+    border: 1.5px solid #55ACEE;
+}
+
+
+/* End of twitter */
+
+
+/* Start of youtube */
+
+#youtube {
+    width: 5rem;
+}
+
+#youtube circle {
+    fill: none;
+}
+
+#youtube path {
+    fill: var(--color-black-primary);
+    opacity: .8;
+}
+
+.footer-bottom .media a:hover #youtube path {
+    fill: #CA3737;
+    opacity: 1;
+}
+
+.footer-bottom .media a.youtube:hover {
+    border: 1.5px solid #CA3737;
+}
+
+
+/* End of youtube */
+
+
+/* Start of whatsapp */
+
+#whatsapp {
+    width: 2.5rem;
+}
+
+#whatsapp path {
+    /* fill: var(--color-black-primary); */
+    opacity: .8;
+}
+
+.footer-bottom .media a:hover #whatsapp path {
+    fill: #57BB63;
+    opacity: 1;
+}
+
+.footer-bottom .media a.whatsapp:hover {
+    border: 1.5px solid #57BB63;
+}
+
+
+/* End of whatsapp */
+
+
+/* Start of snapchat */
+
+#snapchat {
+    width: 2.5rem;
+}
+
+#snapchat path {
+    fill: var(--color-black-primary);
+    opacity: .8;
+}
+
+.footer-bottom .media a:hover #snapchat path {
+    fill: #FFE400;
+    opacity: 1;
+}
+
+.footer-bottom .media a.snapchat:hover {
+    border: 1.5px solid #FFE400;
+}
+
+
+/* End of snapchat */
+
+
+/* Start of langs  */
+
+.footer-bottom .langs {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.footer-bottom .lang {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 2rem;
+    height: 100%;
+}
+
+.footer-bottom .lang a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    transition: color 300ms ease;
+    -webkit-transition: color 300ms ease;
+    -moz-transition: color 300ms ease;
+    -ms-transition: color 300ms ease;
+    -o-transition: color 300ms ease;
+}
+
+.footer-bottom .lang a .arrow_drop_down {
+    margin-left: .5rem;
+    transition: all 200ms ease-in-out;
+    -webkit-transition: all 200ms ease-in-out;
+    -moz-transition: all 200ms ease-in-out;
+    -ms-transition: all 200ms ease-in-out;
+    -o-transition: all 200ms ease-in-out;
+}
+
+.footer-bottom .lang a .arrow_drop_up {
+    margin-left: .5rem;
+    display: none;
+    transition: all 200ms ease-in-out;
+    -webkit-transition: all 200ms ease-in-out;
+    -moz-transition: all 200ms ease-in-out;
+    -ms-transition: all 200ms ease-in-out;
+    -o-transition: all 200ms ease-in-out;
+}
+
+.footer-bottom .lang a:hover .arrow_drop_down {
+    display: none;
+}
+
+.footer-bottom .lang a:hover .arrow_drop_up {
+    display: block;
+}
+
+.footer-bottom .lang a:hover {
+    color: var(--color-orange-primary);
+}
+
+.footer-bottom .lang.others {
+    position: relative;
+}
+
+.lang.others .langs-plus {
+    position: absolute;
+    bottom: 10rem;
+    right: 0;
+    min-width: 15rem;
+    padding: 1rem 0;
+    opacity: 0;
+    visibility: hidden;
+    background-color: var(--color-white-primary);
+    box-shadow: 1px 1px 1px var(--color-black-light), -1px -1px 1px var(--color-black-light);
+    border-bottom: 2px solid var(--color-orange-primary);
+    transition: all 500ms ease;
+    -webkit-transition: all 500ms ease;
+    -moz-transition: all 500ms ease;
+    -ms-transition: all 500ms ease;
+    -o-transition: all 500ms ease;
+}
+
+.langs-plus li {
+    font-size: 2rem;
+    padding: .5rem 2rem;
+}
+
+.footer-bottom .lang.others:hover>.langs-plus {
+    visibility: visible;
+    opacity: 1;
+    bottom: 4rem;
+}
+
+
+/* End of langs  */
+
+
+/* End of footer bottom */
+
+
+/* End of footer  */
