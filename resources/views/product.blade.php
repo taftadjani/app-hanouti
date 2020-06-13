@@ -46,7 +46,7 @@
                     </div>
                     <div class="right">
                         <a href="#" class="material-icons share">share</a>
-                        <a href="#" class="material-icons map">place</a>
+                        <a href="{{ route('maps.store',['id'=>$product->store->id]) }}" class="material-icons map">place</a>
                         <a href="#" class="material-icons compare">sync_alt</a>
                     </div>
                 </div>

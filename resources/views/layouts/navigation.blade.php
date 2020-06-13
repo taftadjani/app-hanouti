@@ -201,7 +201,7 @@
                 <li>
                     <a href="{{ route('stores.index') }}">Stores</a>
                     <ul class="menu-sublist">
-                        <li><a href="#">Top stores</a></li>
+                        <li><a href="{{ route('stores.topStores') }}">Top stores</a></li>
                         <li><a href="#">Populars stores</a></li>
                         <li><a href="#">Stores of the week</a></li>
                         <li><a href="#">Stores around</a></li>

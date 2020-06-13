@@ -12,47 +12,13 @@ class FollowSeeder extends Seeder
      */
     public function run()
     {
-        Follow::create([
-            'followed_by'=>3,
-            'followable_id'=>2,
-            'followable_type'=>'user',
-            'created_at'=>now(),
-            'updated_at'=>now(),
-        ]);
-        Follow::create([
-            'followed_by'=>3,
-            'followable_id'=>1,
-            'followable_type'=>'user',
-            'created_at'=>now(),
-            'updated_at'=>now(),
-        ]);
-        Follow::create([
-            'followed_by'=>2,
-            'followable_id'=>1,
-            'followable_type'=>'user',
-            'created_at'=>now(),
-            'updated_at'=>now(),
-        ]);
-        Follow::create([
-            'followed_by'=>3,
-            'followable_id'=>1,
-            'followable_type'=>'company',
-            'created_at'=>now(),
-            'updated_at'=>now(),
-        ]);
-        Follow::create([
-            'followed_by'=>3,
-            'followable_id'=>1,
-            'followable_type'=>'store',
-            'created_at'=>now(),
-            'updated_at'=>now(),
-        ]);
-        Follow::create([
-            'followed_by'=>2,
-            'followable_id'=>1,
-            'followable_type'=>'store',
-            'created_at'=>now(),
-            'updated_at'=>now(),
-        ]);
+        $faker = Faker\Factory::create();
+        for ($i=0; $i < 1000000; $i++) {
+            Follow::create([
+                'followed_by'=>$faker->numberBetween(1,50),
+                'followable_id'=>$faker->numberBetween(1,100),
+                'followable_type'=>'store',
+            ]);
+        }
     }
 }

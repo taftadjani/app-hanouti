@@ -48,7 +48,7 @@
                     <a href="{{ route('companies.create') }}">Open a company</a>
                     @auth
                         @if (!($auth->isSeller() || $auth->isAdmin()))
-                            <a href="">Become a seller</a>
+                            <a href="{{route('user.become-seller',['id'=>$auth->id])}}">Become a seller</a>
                         @endif
                     @endauth
                     <a href="#">Affiliation</a>

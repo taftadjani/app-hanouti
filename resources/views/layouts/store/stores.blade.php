@@ -2,7 +2,7 @@
     <!-- START STORES -->
     <div class="centering">
         <div class="center-title">
-            <h3>ALL STORES</h3>
+            <h3>{{$title}}</h3>
         </div>
         <div class="center-content">
             @foreach ($stores as $store)
@@ -10,5 +10,6 @@
             @endforeach
         </div>
     </div>
+    {{ $stores->links()}}
     <!-- END STORES -->
 </div>

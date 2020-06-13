@@ -15,11 +15,9 @@ class CheckSeller
      */
     public function handle($request, Closure $next)
     {
-        $role = $request->user()->roles()->orderBy('pivot_id','desc')->first();
-        if ($role->reference === config('app.role.seller')) {
+        if ( $request->user()->roles->count()>=1 && $request->user()->role()->reference === config('app.role.seller')) {
             return $next($request);
-        }else{
-            return redirect()->back();
         }
+        return redirect()->back();
     }
 }

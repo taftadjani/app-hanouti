@@ -1,7 +1,7 @@
 @extends('layouts.app-hanouti')
 
 @section('title-page')
-    Henouti, stores!
+    {{ $title }}
 @endsection
 
 @section('links')
@@ -12,7 +12,8 @@
 
 @section('main-content')
     {{--  Including stores Content --}}
-    @include('layouts.store.stores')
+    @include('layouts.store.stores',['title'=>$title, 'stores'=>$stores])
+
 @endsection
 
 @section('scripts-links')

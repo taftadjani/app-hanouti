@@ -14,7 +14,6 @@ class CreateProductStoreSubCategoryTable extends Migration
     public function up()
     {
         Schema::create('product_store_sub_category', function (Blueprint $table) {
-            $table->primary(['product_store_id','sub_category_id'], $name ='id');
             $table->foreignId('product_store_id')->constrained();
             $table->foreignId('sub_category_id')->constrained();
             $table->timestamps();

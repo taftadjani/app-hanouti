@@ -53,18 +53,11 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function becomeSeller()
+    public function becomeSeller($id)
     {
         if (Auth::check()) {
-            $seller_role = Role::where('reference', config('role.seller'))->first();
-            if ( Auth::user()->roles->count()<1) {
-                // The user doesn't have any role
-                Auth::user()->roles()->attach($seller_role);
-            }
-            if (!(Auth::user()->isSeller() || Auth::user()->isAdmin()) ) {
-                // authenticated and not seller and not admin : upgrade him as a seller
-                Auth::user()->roles()->attach($seller_role);
-            }
+            $seller_role = Role::where('reference', config('app.role.seller'))->first();
+            Auth::user()->roles()->attach($seller_role);
             return redirect()->route('home');
         }else {
             return "not connected";

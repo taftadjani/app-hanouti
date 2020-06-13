@@ -44,4 +44,18 @@ class MapController extends Controller
         return $results;
     }
 
+    /**
+     * Display a listing of the resource. stores
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getStore($id)
+    {
+        $store = Store::where('id',$id)->first();
+        if ($store->location ) {
+            return view("layouts.maps.store", ['store'=>$store]);
+        }else{
+            return redirect()->back();
+        }
+    }
 }

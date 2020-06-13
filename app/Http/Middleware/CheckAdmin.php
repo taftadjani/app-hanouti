@@ -15,11 +15,9 @@ class CheckAdmin
      */
     public function handle($request, Closure $next)
     {
-        $role = $request->user()->roles()->orderBy('pivot_id','desc')->first();
-        if ($role->reference === config('app.role.admin')) {
+        if ( $request->user()->roles->count()>=1 && $request->user()->role()->reference === config('app.role.admin')) {
             return $next($request);
-        }else{
-            return redirect()->back();
         }
+        return redirect()->back();
     }
 }

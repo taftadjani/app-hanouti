@@ -31,8 +31,20 @@ class StoreController extends Controller
      */
     public function index()
     {
-        $stores=Store::all();
-        return view('layouts.store.index',['stores'=>$stores]);
+        $stores=Store::simplePaginate(15);
+        return view('layouts.store.index',['stores'=>$stores, 'title'=>"All stores"]);
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function topStores()
+    {
+        $stores=Store::all()->take(25);
+        return view('layouts.store.index',['stores'=>$stores, 'title'=>"Top stores"]);
     }
 
     /**
@@ -40,7 +52,6 @@ class StoreController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
     public function create()
     {
         $seller_role = Role::where('reference', config('app.role.seller'))->first();

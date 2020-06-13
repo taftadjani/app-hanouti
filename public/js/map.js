@@ -42,16 +42,6 @@ const createMap = (centerLatLng = getGoogleLatLng(defaultPosition), zoom = 8, re
     return map;
 }
 
-// Create marker
-const createMarker = (map, title, latLng = getGoogleLatLng(defaultPosition), icon = null) => {
-    new google.maps.Marker({
-        position: latLng,
-        icon: icon,
-        map: map,
-        title: title
-    });
-}
-
 const getStores = (map, latLng = defaultPosition) => {
     let xhr = new XMLHttpRequest();
     let url = 'http://localhost/app-hanouti/public/api/maps/stores';
@@ -64,8 +54,6 @@ const getStores = (map, latLng = defaultPosition) => {
         //Call a function when the state changes.
         if (xhr.readyState == 4 && xhr.status == 200) {
             JSON.parse(xhr.responseText).forEach(store => {
-                console.log(store);
-
                 createMarker(map, store.storeName, getGoogleLatLng({
                     'lat': store.lat,
                     'lng': store.lng,
@@ -75,6 +63,7 @@ const getStores = (map, latLng = defaultPosition) => {
     }
     xhr.send(params);
 }
+
 window.onload = _ => {
     // Document is ready
     getUserLocation();

@@ -92,7 +92,6 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        $roles = $this->roles;
         if ( $this->roles->count()>=1 && $this->role()->reference === config('app.role.admin')) {
             return true;
         }
@@ -106,7 +105,7 @@ class User extends Authenticatable
     {
         // Perform some operation to allow the user
         $user = Auth::user();
-        $permission_result =  $user->roles->first()->privileges->where("name",$permission);
+        $permission_result =  $user->role()->privileges->where("name",$permission);
         if (count($permission_result) > 0) {
             return true;
         }

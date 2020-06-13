@@ -219,7 +219,7 @@ class CartController extends Controller
      */
     public function clear(Cart $cart)
     {
-        $response = Gate::inspect('clear',$cart);
+        $response = Gate::inspect('clear', $cart);
         if ($response->allowed()){
             // Do some cleaning
             $cartDetailController = new CartDetailController();

@@ -12,25 +12,14 @@ class ProductStoreSubCategorySeeder extends Seeder
      */
     public function run()
     {
-        DB::table('product_store_sub_category')->insert([
-            [
-                'product_store_id'=>1,
-                'sub_category_id'=>1,
-                'created_at'=>now(),
-                'updated_at'=>now(),
-            ],
-            [
-                'product_store_id'=>1,
-                'sub_category_id'=>3,
-                'created_at'=>now(),
-                'updated_at'=>now(),
-            ],
-            [
-                'product_store_id'=>1,
-                'sub_category_id'=>4,
-                'created_at'=>now(),
-                'updated_at'=>now(),
-            ],
-        ]);
+        $faker = Faker\Factory::create();
+        for ($i=0; $i < 1000; $i++) {
+            DB::table('product_store_sub_category')->insert([
+                    'product_store_id'=>$i+1,
+                    'sub_category_id'=>$faker->numberBetween(1,87),
+                    'created_at'=>now(),
+                    'updated_at'=>now(),
+                ]);
+        }
     }
 }

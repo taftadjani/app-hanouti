@@ -291,6 +291,7 @@ Route::middleware('auth')->get('locations/{location}/restore', "LocationControll
 
 // maps
 Route::get('maps/stores', "MapController@index")->name('maps.stores');
+Route::get('maps/{id}/map', "MapController@getStore")->name('maps.store');
 
 // messages
 Route::resource('messages', 'MessageController')->names(
@@ -498,6 +499,7 @@ Route::middleware('auth')->get('stars/{star}/restore', "StarController@restore")
 
 // Stores
 Route::get('stores', "StoreController@index")->name('stores.index');
+Route::get('stores/topStores', "StoreController@topStores")->name('stores.topStores');
 
 Route::middleware('auth')->get("stores/create", "StoreController@create")->name('stores.create');
 Route::get("stores/{store}", "StoreController@show")->name('stores.show');
@@ -618,13 +620,17 @@ Route::get('test', function () {
     // return $cart;
     // $user = Auth::user();
     // $permission_result =  $user->roles->first()->privileges->where("name",'index-stores');
-    return "ok  ";
+
+    $store = Store::where('id', 12)->first();
+    return $store->location==null;
 });
 
 Route::get('connected/user', function () {
-    return Auth::user()->role();
+    // return Auth::user()->role()->privileges;
+    return Auth::user()->haveAccess('clear-cart');
 })->middleware('auth');
 
 // Users
 Route::get('users/stores', "UserController@myStores");
 Route::get('users/companies', "UserController@myCompanies");
+Route::get('user/{id}', "UserController@becomeSeller")->name('user.become-seller');
