@@ -13,7 +13,7 @@ class ProductStoreSubCategorySeeder extends Seeder
     public function run()
     {
         $faker = Faker\Factory::create();
-        for ($i=0; $i < 1000; $i++) {
+        for ($i=0; $i < 50; $i++) {
             DB::table('product_store_sub_category')->insert([
                     'product_store_id'=>$i+1,
                     'sub_category_id'=>$faker->numberBetween(1,87),

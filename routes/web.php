@@ -17,6 +17,7 @@ use App\SubCategory;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
@@ -42,14 +43,13 @@ Route::get('/', "HomeController@index")->name('home');
 
 Route::put('users/{id}', "ProfileController@delete")->name('users.delete');
 Route::delete('users/{id}', "ProfileController@destroy")->name('users.destroy');
+Route::get('users/adminIndex', "UserController@adminIndex")->name('users.adminIndex');
 
 Route::post('subscription', function () {
     return "Store email in subscription";
 })->name('subscribe');
 
-Route::get('search-result', function () {
-
-})->name('search-result');
+Route::get('/search/result', "SearchController@results")->name('search-result');
 
 // Profile
 Route::get('profile', "ProfileController@index")->name('profile.index');
@@ -95,13 +95,16 @@ Route::resource('carts', 'CartController')->names(
     ]
 );
 Route::middleware('auth')->get('carts/create', "CartController@create")->name('carts.create');
+Route::middleware('auth')->get('carts/deletes/list-of-carts', "CartController@deleteShow")->name('carts.delete.list.show');
 Route::middleware('auth')->post('carts/store', "CartController@store")->name('carts.store');
 Route::middleware('auth')->get('carts/{cart}/edit', "CartController@edit")->name('carts.edit');
 Route::middleware('auth')->put('carts/{cart}', "CartController@update")->name('carts.update');
 Route::middleware('auth')->delete('carts/{cart}', "CartController@destroy")->name('carts.destroy');
+Route::middleware('auth')->delete('carts/delete/many', "CartController@deleteCarts")->name('carts.destroy.many');
 Route::middleware('auth')->get('carts/{cart}/restore', "CartController@restore")->name('carts.restore');
 Route::middleware('auth')->get('carts/{cart}/clear', "CartController@clear")->name('carts.clear');
-Route::middleware('auth')->get('carts/{cart}/order', "CartController@order")->name('carts.order');
+Route::middleware('auth')->post('carts/order', "CartController@order")->name('carts.order');
+Route::middleware('auth')->get('carts/{cart}/getOrderInfo', "CartController@getOrderInfo")->name('carts.get.order.info');
 
 // CartDetails
 Route::resource('cartDetails', 'CartDetailController')->names(
@@ -622,7 +625,10 @@ Route::get('test', function () {
     // $permission_result =  $user->roles->first()->privileges->where("name",'index-stores');
 
     $store = Store::where('id', 12)->first();
-    return $store->location==null;
+    $faker = Faker\Factory::create();
+    // ->where('id', )->first()
+    $data =DB::table('product_detail_names')->select('name')->where('id', 3)->pluck('name')->first();
+    return $data ;
 });
 
 Route::get('connected/user', function () {

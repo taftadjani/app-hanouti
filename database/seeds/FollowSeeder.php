@@ -13,10 +13,10 @@ class FollowSeeder extends Seeder
     public function run()
     {
         $faker = Faker\Factory::create();
-        for ($i=0; $i < 1000000; $i++) {
+        for ($i=0; $i < 100; $i++) {
             Follow::create([
-                'followed_by'=>$faker->numberBetween(1,50),
-                'followable_id'=>$faker->numberBetween(1,100),
+                'followed_by'=>$faker->numberBetween(1,10),
+                'followable_id'=>$faker->numberBetween(1,10),
                 'followable_type'=>'store',
             ]);
         }

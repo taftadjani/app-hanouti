@@ -221,7 +221,7 @@ class CartDetailController extends Controller
                 }
             }
             if ($request->has('quantity') && $request['quantity']) {
-                if ($productStore->quantity < $request['quantity']) {
+                if ($cartDetail->productStore->quantity < $request['quantity']) {
                     # code...
                     return "Less quantity";
                 }
@@ -245,7 +245,7 @@ class CartDetailController extends Controller
      * @param  \App\CartDetail  $cartDetail
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CartDetail $cartDetail)
+    public static function destroy(CartDetail $cartDetail)
     {
         $response = Gate::inspect('delete',$cartDetail);
         if ($response->allowed()){
@@ -337,7 +337,7 @@ class CartDetailController extends Controller
                 # code...
                 return ;
             }
-            if ($productStore->quantity < $request['quantity']) {
+            if ($cartDetail->productStore->quantity < $request['quantity']) {
                 # code...
                 return "Less quantity";
             }
@@ -346,7 +346,6 @@ class CartDetailController extends Controller
         }
         else{
             echo $response->message();
-            return $request["quantity"]+10000;
         }
     }
 }

@@ -79,12 +79,23 @@
                         @endauth
                     </div>
                     <div class="reviews no-selectable-text">
-                        <div class="stars">
-                            <span class="material-icons">star</span>
-                            <span class="material-icons">star</span>
-                            <span class="material-icons">star</span>
-                            <span class="material-icons">star</span>
-                            <span class="material-icons">star</span>
+                        <div class="stars reviews-star">
+                            <div class="rating">
+                                <div class="rating-upper" style="width: {{ $percentage_star}}%">
+                                    <span class="material-icons">star</span>
+                                    <span class="material-icons">star</span>
+                                    <span class="material-icons">star</span>
+                                    <span class="material-icons">star</span>
+                                    <span class="material-icons">star</span>
+                                </div>
+                                <div class="rating-lower">
+                                    <span class="material-icons">star</span>
+                                    <span class="material-icons">star</span>
+                                    <span class="material-icons">star</span>
+                                    <span class="material-icons">star</span>
+                                    <span class="material-icons">star</span>
+                                </div>
+                            </div>
                         </div>
                         <div class="count">33 customers reviews</div>
                     </div>
@@ -133,7 +144,7 @@
                         </div>
                         <div class="value">
                             <button class="btn minus"><div class="minus no-selectable-text"></div></button>
-                            <input type="text" class="quantity" value="{{ $product->prices[0]->quantity }}">
+                            <input type="number" class="quantity" value="{{ $product->prices[0]->quantity }}" max="{{ $product->quantity_stock }}">
                             <button class="btn plus ">
                                 <div class="plus no-selectable-text"></div>
                                 <div class="plus plus-2 no-selectable-text"></div>
@@ -325,7 +336,7 @@
                         <div class="reviews-star">
                             <h3>Reviews</h3>
                             <div class="rating">
-                                <div class="rating-upper" style="width: 5%">
+                                <div class="rating-upper" style="width: {{ $percentage_star}}%">
                                     <span class="material-icons">star</span>
                                     <span class="material-icons">star</span>
                                     <span class="material-icons">star</span>
@@ -342,86 +353,67 @@
                             </div>
                         </div>
                         <div class="content">
-                            <div class="review">
-                                <div class="username">Tafta :</div>
-                                <div class="stars">
-                                    <span class="material-icons active">star</span>
-                                    <span class="material-icons active">star</span>
-                                    <span class="material-icons active">star</span>
-                                    <span class="material-icons">star</span>
-                                    <span class="material-icons">star</span>
+                            @foreach ($product->stars as $star)
+                                <div class="review">
+                                    <div class="username">{{ $star->user->first_name }} :</div>
+                                    <div class="stars">
+                                        <span class="material-icons
+                                        @if ($star->value>=1)
+                                            active
+                                        @endif">star</span>
+                                        <span class="material-icons
+                                        @if ($star->value>=2)
+                                            active
+                                        @endif">star</span>
+                                        <span class="material-icons
+                                        @if ($star->value>=3)
+                                            active
+                                        @endif">star</span>
+                                        <span class="material-icons
+                                        @if ($star->value>=4)
+                                            active
+                                        @endif">star</span>
+                                        <span class="material-icons
+                                        @if ($star->value>=5)
+                                            active
+                                        @endif">star</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="review">
-                                <div class="username">Tafta :</div>
-                                <div class="stars">
-                                    <span class="material-icons active">star</span>
-                                    <span class="material-icons active">star</span>
-                                    <span class="material-icons active">star</span>
-                                    <span class="material-icons">star</span>
-                                    <span class="material-icons">star</span>
+                            @endforeach
+                        </div>
+                        <div class="add-review" id="add-review">
+                            <form  action="{{ route('stars.store') }}" method="POST"  enctype="multipart/form-data">
+                                @csrf
+                                <input type="text" name="starable_type" hidden value="product_store">
+                                <input type="text" name="starable_id" hidden value="{{ $product->id }}">
+                                <div class="add-star-container">
+                                    <button type="submit" name="value" value="1" data-value="1" @if ($star_value>=1)
+                                        class="active"
+                                    @endif>
+                                        <span class="material-icons">star</span>
+                                    </button>
+                                    <button type="submit" name="value" value="2" data-value="2" @if ($star_value>=2)
+                                        class="active"
+                                    @endif>
+                                        <span class="material-icons">star</span>
+                                    </button>
+                                    <button type="submit" name="value" value="3" data-value="3" @if ($star_value>=3)
+                                        class="active"
+                                    @endif>
+                                        <span class="material-icons">star</span>
+                                    </button>
+                                    <button type="submit" name="value" value="4" data-value="4" @if ($star_value>=4)
+                                        class="active"
+                                    @endif>
+                                        <span class="material-icons">star</span>
+                                    </button>
+                                    <button type="submit" name="value" value="5" data-value="5" @if ($star_value>=5)
+                                        class="active"
+                                    @endif>
+                                        <span class="material-icons">star</span>
+                                    </button>
                                 </div>
-                            </div>
-                            <div class="review">
-                                <div class="username">Tafta :</div>
-                                <div class="stars">
-                                    <span class="material-icons active">star</span>
-                                    <span class="material-icons active">star</span>
-                                    <span class="material-icons active">star</span>
-                                    <span class="material-icons">star</span>
-                                    <span class="material-icons">star</span>
-                                </div>
-                            </div>
-                            <div class="review">
-                                <div class="username">Tafta :</div>
-                                <div class="stars">
-                                    <span class="material-icons active">star</span>
-                                    <span class="material-icons active">star</span>
-                                    <span class="material-icons active">star</span>
-                                    <span class="material-icons">star</span>
-                                    <span class="material-icons">star</span>
-                                </div>
-                            </div>
-                            <div class="review">
-                                <div class="username">Tafta :</div>
-                                <div class="stars">
-                                    <span class="material-icons active">star</span>
-                                    <span class="material-icons active">star</span>
-                                    <span class="material-icons active">star</span>
-                                    <span class="material-icons">star</span>
-                                    <span class="material-icons">star</span>
-                                </div>
-                            </div>
-                            <div class="review">
-                                <div class="username">Tafta :</div>
-                                <div class="stars">
-                                    <span class="material-icons active">star</span>
-                                    <span class="material-icons active">star</span>
-                                    <span class="material-icons active">star</span>
-                                    <span class="material-icons">star</span>
-                                    <span class="material-icons">star</span>
-                                </div>
-                            </div>
-                            <div class="review">
-                                <div class="username">Tafta :</div>
-                                <div class="stars">
-                                    <span class="material-icons active">star</span>
-                                    <span class="material-icons active">star</span>
-                                    <span class="material-icons active">star</span>
-                                    <span class="material-icons">star</span>
-                                    <span class="material-icons">star</span>
-                                </div>
-                            </div>
-                            <div class="review">
-                                <div class="username">Tafta :</div>
-                                <div class="stars">
-                                    <span class="material-icons active">star</span>
-                                    <span class="material-icons active">star</span>
-                                    <span class="material-icons active">star</span>
-                                    <span class="material-icons">star</span>
-                                    <span class="material-icons">star</span>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 @endif

@@ -3,7 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Cart;
+use App\CartDetail;
 use App\Currency;
+use App\Delivery;
+use App\DeliveryMode;
+use App\Order;
+use App\OrderDetail;
+use App\Payment;
+use App\PaymentMethod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -78,7 +85,7 @@ class CartController extends Controller
                 ]
             );
             // Do something after creating brand
-            return $this->show($cart);
+            return redirect()->route('home');
         }else {
             echo $response->message();
         }
@@ -102,6 +109,47 @@ class CartController extends Controller
             echo $response->message();
         }
     }
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Cart  $cart
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteShow()
+    {
+        if (Auth::user()->carts->count() <=1  ) {
+            return back();
+        }
+        return view('layouts.cart.cartsShow', [
+                'carts'=>Auth::user()->carts,
+                ]);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Cart  $cart
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteCarts(Request $request)
+    {
+        // return  $request['carts_id'][0];
+        $request->validate([
+            'carts_id'=>'bail|required|array',
+        ]);
+        $user_cart_count = Auth::user()->carts->count();
+
+        if ($user_cart_count>count($request['carts_id'])) {
+            foreach ($request['carts_id'] as $key => $cart_id) {
+                $cart = Cart::where('id', $cart_id)->first();
+                    $no = $this->destroy($cart);
+                }
+        }
+        return redirect()->route('home');
+    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -163,6 +211,7 @@ class CartController extends Controller
     {
         $response = Gate::inspect('delete',$cart);
         if ($response->allowed()){
+
             $cart->delete();
            // Return to dashboard with a message
            return redirect()->route('home');
@@ -234,6 +283,8 @@ class CartController extends Controller
         }
     }
 
+
+
     /**
      * Determine whether the user can order Cart the model.
      *
@@ -241,12 +292,78 @@ class CartController extends Controller
      * @param  \App\Product  $product
      * @return mixed
      */
-    public function order(Cart $cart)
+    public function getOrderInfo(Cart $cart)
     {
         $response = Gate::inspect('order',$cart);
         if ($response->allowed()){
+            $payments = PaymentMethod::all();
+            $deliveries = Auth::user()->deliveries;
+            return view('orderInfo' ,compact('cart', 'payments','deliveries'));
+        }
+        else{
+            echo $response->message();
+        }
+        return redirect()->back();
+    }
+
+    /**
+     * Determine whether the user can order Cart the model.
+     *
+     * @param  \App\User  $user
+     * @param  \App\Product  $product
+     * @return mixed
+     */
+    public function order(Request $request)
+    {
+        $request->validate([
+            'cart'=>'numeric|required',
+            'payment_method'=>'numeric|required',
+            'delivery'=>'numeric|required',
+        ]);
+        $cart = Cart::where('id',$request['cart'])->first();
+        $payment_method_id = $request['payment_method'];
+        $delivery_id = $request['delivery'];
+        $order_by = Auth::id();
+        $response = Gate::inspect('order',$cart);
+        if ($response->allowed()){
+            if ($cart->cartDetails->count()<1) {
+                return "Pas de produits dans le panier";
+            }
             // Do some cleaning
-            return "Ordering ...";
+            $currency_id = Auth::user()->city->country->currency->id;
+            // $request['currency_id']=$currency_id;
+            $order =Order::create([
+                'currency_id' =>$currency_id,
+                'delivery_id' =>$delivery_id,
+                'order_by' =>$order_by,
+            ]);
+            $order_id = $order->id;
+
+            // Calculer la valeur
+
+            $value = 0;
+
+            $payment=Payment::create([
+                'payment_method_id'=>$payment_method_id,
+                'order_id'=>$order_id,
+                'paids'=>0,
+                'amount'=>$value,
+                'user_id'=>Auth::id()
+            ]);
+
+            // Creer les orderDetails
+            foreach ($cart->cartDetails as $cartDetail) {
+                OrderDetail::create([
+                    'product_store_id'=>$cartDetail->product_store_id,
+                    'order_id'=>$order_id,
+                    'unit_id'=>$cartDetail->unit_id,
+                    'price_id'=>$cartDetail->price_id,
+                    'quantity'=>$cartDetail->quantity,
+                ]);
+                CartDetailController::destroy($cartDetail);
+            }
+
+            return redirect()->route('home');
         }
         else{
             echo $response->message();

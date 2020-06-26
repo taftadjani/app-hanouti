@@ -73,7 +73,7 @@
                         <button>Users</button>
                         <ul class="nav-content">
                             <li>
-                                <a href="#">Get all users</a>
+                                <a href="{{ route('users.adminIndex') }}" id="list-users-link">Get all users</a>
                             </li>
                             <li>
                                 <a href="#">Add a user</a>
@@ -88,7 +88,7 @@
                                 <a href="#">Get all stores</a>
                             </li>
                             <li>
-                                <a href="#">Add a store</a>
+                                <a href="{{ route('stores.create') }}">Add a store</a>
                             </li>
                         </ul>
                     </div>
@@ -117,17 +117,6 @@
                                                 <a href="{{ route('productStores.create') }}" id="add-product-store-link">Add a new product store</a>
                                             </li>
                                             <li><a href="{{ route('productStores.adminIndex') }}" id="list-product-store-link">List of product store</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="more-item">
-                                        <span>Product store</span>
-                                        <ul class="more-item-content" >
-                                            <li>
-                                                <a href="#">Add a new product store</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Add a new product store</a>
-                                            </li>
                                         </ul>
                                     </li>
                                 </ul>

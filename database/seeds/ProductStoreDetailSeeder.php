@@ -12,32 +12,15 @@ class ProductStoreDetailSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('product_store_details')->insert([
-            [
-                'product_store_id'=>1,
-                'name'=>"size",
-                'content_value'=>"90",
+        $faker = Faker\Factory::create();
+        for ($i=0; $i < 100; $i++) {
+            DB::table('product_store_details')->insert([
+                'name'=> DB::table('product_detail_names')->select('name')->where('id', $faker->numberBetween(1,70))->pluck('name')->first(),
+                'content_value'=>implode(" ",$faker->words(5)),
+                'product_store_id'=>$faker->numberBetween(1,50),
                 'created_at'=>now(),
                 'updated_at'=>now(),
-            ],
-        ]);
-        DB::table('product_store_details')->insert([
-            [
-                'product_store_id'=>1,
-                'name'=>"weight",
-                'content_value'=>"90:1",
-                'created_at'=>now(),
-                'updated_at'=>now(),
-            ],
-        ]);
-        DB::table('product_store_details')->insert([
-            [
-                'product_store_id'=>2,
-                'name'=>"width",
-                'content_value'=>"90",
-                'created_at'=>now(),
-                'updated_at'=>now(),
-            ],
-        ]);
+            ]);
+        }
     }
 }

@@ -28,7 +28,7 @@ class HomeController extends Controller
         $products=ProductStore::all();
         $collections =[];
         foreach ($products as $product) {
-            if (count($product->prices)>0) {
+            if (count($product->prices)>0 && $product->quantity_stock>=$product->prices[0]->quantity) {
                 $collections[]=$product;
             }
             if (count($collections)>=10 ) {
@@ -37,7 +37,7 @@ class HomeController extends Controller
         }
         $recommendeds=[];
         foreach ($products as $product) {
-            if (count($product->prices)>0) {
+            if (count($product->prices)>0 && $product->quantity_stock>=$product->prices[0]->quantity) {
                 $recommendeds[]=$product;
             }
             if (count($recommendeds)>=10 ) {
@@ -46,7 +46,7 @@ class HomeController extends Controller
         }
         $highTech=[];
         foreach ($products as $product) {
-            if (count($product->prices)>0) {
+            if (count($product->prices)>0 && $product->quantity_stock>=$product->prices[0]->quantity) {
                 $highTech[]=$product;
             }
             if (count($highTech)>=10 ) {

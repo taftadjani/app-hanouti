@@ -49,7 +49,6 @@ const buy_now = document.querySelector('#btn-buy-now');
 document.querySelector('body').onload = _ => {
 
     if (shopping_cart.innerHTML.trim() == '' || shopping_cart.innerHTML == null) {
-        console.log("hi");
         shopping_cart.innerHTML = 'add_shopping_cart';
     }
 }
@@ -61,11 +60,12 @@ shopping_cart.onclick = e => {
     add_shopping_cart_form_quantity.value = quantity_input.value;
     const addFormData = new FormData(document.querySelector('#add_shopping_cart_form'));
     const deleteFormData = new FormData(document.querySelector('#delete_shopping_cart_form'));
+    console.log(add_shopping_cart_form_quantity.value);
+
 
     if (shopping_cart.innerHTML !== 'add_shopping_cart') {
         let xhr = new XMLHttpRequest();
         xhr.onloadend = function() {
-            console.log(this.responseText);
             shopping_cart.innerHTML = 'add_shopping_cart';
         }
         xhr.open('POST', document.querySelector('#delete_shopping_cart_form').action, true);
@@ -74,11 +74,11 @@ shopping_cart.onclick = e => {
         // document.querySelector('#add_shopping_cart_form').submit();
         let xhr = new XMLHttpRequest();
         xhr.onloadend = function() {
-            console.log(this.responseText);
-
             if (this.responseText == "1") {
                 shopping_cart.innerHTML = 'shopping_cart';
             }
+            console.log(this.responseText);
+
         }
         xhr.open('POST', document.querySelector('#add_shopping_cart_form').action, true);
         xhr.send(addFormData);
@@ -102,3 +102,25 @@ buy_now.onclick = e => {
 }
 
 // End of actions on top
+
+// Start of add review
+const add_stars_btns = document.querySelectorAll('#add-review .add-star-container button');
+
+add_stars_btns.forEach(btn => {
+    btn.addEventListener('mouseenter', _ => {
+        for (let i = 0; i < 5; i++) {
+            add_stars_btns[i].classList.remove('active');
+        }
+        for (let i = 1; i <= btn.getAttribute('data-value'); i++) {
+            if (add_stars_btns[i - 1].getAttribute("data-value") <= i) {
+                add_stars_btns[i - 1].classList.add('active');
+            }
+        }
+    });
+    btn.addEventListener('mouseleave', _ => {
+        for (let i = 0; i < 5; i++) {
+            add_stars_btns[i].classList.remove('active');
+        }
+    });
+});
+// End of add review

@@ -60,17 +60,41 @@ class StarController extends Controller
                 'starable_type'=>'bail|required|string|max:255',
                 'starable_id'=>'bail|required|numeric',
             ]);
-            // Store in database
-            $star = Star::create(
-                [
-                    'inserted_by'=>Auth::id(),
-                    'value'=>$request['value'],
-                    'starable_type'=>$request['starable_type'],
-                    'starable_id'=>$request['starable_id'],
-                ]
-            );
+            $stars = Auth::user()->stars->where('starable_type',$request['starable_type'])->where('starable_id',$request['starable_id']);
+            $stars_count = $stars->count();
+            if ($stars_count>1) {
+                // Store in database
+                for ($i=0; $i < $stars_count; $i++) {
+                    $this->destroy($stars[$i]);
+                }
+                $star = Star::create(
+                    [
+                        'inserted_by'=>Auth::id(),
+                        'value'=>$request['value'],
+                        'starable_type'=>$request['starable_type'],
+                        'starable_id'=>$request['starable_id'],
+                    ]
+                );
+            }else if ($stars_count ==1){
+                $star = Auth::user()
+                                ->stars
+                                ->where('starable_type',$request['starable_type'])
+                                ->where('starable_id',$request['starable_id'])
+                                ->first();
+                $star->value = $request['value'];
+                $star->save();
+            }else {
+                $star = Star::create(
+                    [
+                        'inserted_by'=>Auth::id(),
+                        'value'=>$request['value'],
+                        'starable_type'=>$request['starable_type'],
+                        'starable_id'=>$request['starable_id'],
+                    ]
+                );
+            }
             // Do something after creating brand
-            return $this->show($star);
+            return redirect()->back();
         }else {
             echo $response->message();
         }

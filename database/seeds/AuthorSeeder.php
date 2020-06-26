@@ -12,14 +12,14 @@ class AuthorSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker\Factory::create();
-        for ($i=0; $i < 100; $i++) {
-        Author::create([
-                'first_name'=>$faker->firstName,
-                'last_name'=>$faker->lastName,
-                'biography'=>$faker->text,
-                'inserted_by'=>$faker->numberBetween(1,50)
-            ]);
-        }
+        // $faker = Faker\Factory::create();
+        // for ($i=0; $i < 10; $i++) {
+        // Author::create([
+        //         'first_name'=>$faker->firstName,
+        //         'last_name'=>$faker->lastName,
+        //         'biography'=>$faker->text,
+        //         'inserted_by'=>$faker->numberBetween(1,10)
+        //     ]);
+        // }
     }
 }

@@ -12,7 +12,11 @@
         <div class="bottom">
             @foreach ($categories as $category)
                 <a href="{{route('categories.show',['category'=>$category->id])}}">
-                    <div class="img"></div>
+                    <div class="img">
+                        @if ($category->logo)
+                            <img src="{{ url('/uploads/images/category/'.$category->logo) }}" alt="NO PHOTO">
+                        @endif
+                    </div>
                     <h3 class="title">{{ $category->name }}</h3>
                 </a>
             @endforeach

@@ -16,10 +16,10 @@ class CompanySeeder extends Seeder
     {
         $faker = Faker\Factory::create();
         $faker_ko = Faker\Factory::create('ko_KR');
-        for ($i=0; $i < 50; $i++) {
+        for ($i=0; $i < 10; $i++) {
             $nationality = $faker->numberBetween(1,2);
             Company::create([
-                'inserted_by'=>$faker->numberBetween(1,50),
+                'inserted_by'=>$faker->numberBetween(1,10),
                 'name'=>$faker->company,
                 'description'=>$faker->text,
                 'mail'=>$faker->unique()->freeEmail(),

@@ -32,12 +32,7 @@ class ProductStoreController extends Controller
         // Return list of ProductStore
         $productStore = ProductStore::all();
 
-        $products= [];
-        foreach ($productStore as $product) {
-            $products[]=$product;
-        }
-
-        return view('layouts.productStore.index',['products'=>$products, 'title'=>'All products']);
+        return view('layouts.productStore.index',['products'=>$productStore, 'title'=>'All products']);
     }
 
     /**
@@ -50,18 +45,8 @@ class ProductStoreController extends Controller
         // The action is authorized...
 
         // Return list of ProductStore
-        $productStore = ProductStore::all();
-
-        $products= [];
-        foreach ($productStore as $product) {
-            $products[]=$product;
-        }
-
-        return view('layouts.productStore.adminIndex',['products'=>$products]);
-
-        // $user = Auth::user();
-        // return $user->stores->where('id',1)->first() ;
-
+        $productStore = ProductStore::all()->take(300);
+        return view('layouts.productStore.adminIndex',['products'=>$productStore]);
     }
 
     /**
@@ -314,7 +299,7 @@ class ProductStoreController extends Controller
             );
 
             // Return to show method with a success message
-            return redirect()->back();
+            return redirect()->route('home');
         } else {
             echo $response->message();
         }
@@ -328,10 +313,29 @@ class ProductStoreController extends Controller
      */
     public function show(ProductStore $productStore)
     {
+        $star_value = 0;
+        foreach ($productStore->stars as $star) {
+            if ($star->inserted_by ==Auth::id()) {
+                $star_value = $star->value;
+            break;
+            }
+        }
+        $percentage = 0;
+        $value = 0;
+        $max_value = 0;
+        foreach ($productStore->stars as $star) {
+            $value +=$star->value;
+            $max_value+=5;
+        }
+        if (!($max_value ==0)) {
+            $percentage = $value/$max_value;
+        }
         return view('layouts.productStore.show',
                                     [
                                         'product'=>$productStore,
-                                        "auth"=>Auth::user()
+                                        "auth"=>Auth::user(),
+                                        'star_value'=>$star_value,
+                                        'percentage_star'=>$percentage*100
                                     ]);
     }
 

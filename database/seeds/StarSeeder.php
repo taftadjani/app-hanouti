@@ -12,47 +12,22 @@ class StarSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('stars')->insert([
-            [
-                'inserted_by'=>2,
-                'starable_id'=>2,
-                'starable_type'=>'store',
-                'value'=>2,
-                'created_at'=>now(),
-                'updated_at'=>now(),
-            ],
-            [
-                'inserted_by'=>2,
-                'starable_id'=>2,
-                'starable_type'=>'product_store',
-                'value'=>5,
-                'created_at'=>now(),
-                'updated_at'=>now(),
-            ],
-            [
-                'inserted_by'=>2,
-                'starable_id'=>2,
-                'starable_type'=>'company',
-                'value'=>2,
-                'created_at'=>now(),
-                'updated_at'=>now(),
-            ],
-            [
-                'inserted_by'=>3,
-                'starable_id'=>2,
-                'starable_type'=>'product_store',
-                'value'=>1,
-                'created_at'=>now(),
-                'updated_at'=>now(),
-            ],
-            [
-                'inserted_by'=>3,
-                'starable_id'=>2,
-                'starable_type'=>'company',
-                'value'=>4,
-                'created_at'=>now(),
-                'updated_at'=>now(),
-            ],
-        ]);
+        $faker = Faker\Factory::create();
+        for ($i=0; $i < 50; $i++) {
+            for ($j=0; $j < $faker->numberBetween(1,5); $j++) {
+                $faker_unique = Faker\Factory::create();
+                DB::table('stars')->insert([
+                    [
+                        'inserted_by'=>$faker_unique->unique()->numberBetween(1,10),
+                        'starable_id'=>$i,
+                        'starable_type'=>'product_store',
+                        'value'=>$faker_unique->numberBetween(1,5),
+                        'created_at'=>now(),
+                        'updated_at'=>now(),
+                    ]
+                ]);
+            }
+
+        }
     }
 }

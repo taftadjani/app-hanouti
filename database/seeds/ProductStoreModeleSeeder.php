@@ -12,19 +12,14 @@ class ProductStoreModeleSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('product_store_modele')->insert([
-            [
-                'modele_id'=>1,
-                'product_store_id'=>1,
+        $faker = Faker\Factory::create();
+        for ($i=0; $i < 50; $i++) {
+            DB::table('product_store_modele')->insert([
+                'modele_id'=>$faker->numberBetween(1,7),
+                'product_store_id'=>$i+1,
                 'created_at'=>now(),
                 'updated_at'=>now(),
-            ],
-            [
-                'modele_id'=>2,
-                'product_store_id'=>5,
-                'created_at'=>now(),
-                'updated_at'=>now(),
-            ],
-        ]);
+            ]);
+        }
     }
 }

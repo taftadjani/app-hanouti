@@ -135,7 +135,7 @@ class StoreController extends Controller
             $store->save();
 
             // Do something after creating store
-            return $this->show($store);
+            return redirect()->route('home');
         }else {
             echo $response->message();
         }

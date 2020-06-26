@@ -12,21 +12,6 @@ class ProviderSeeder extends Seeder
      */
     public function run()
     {
-        Provider::create([
-            'complete_name'=>'Provider 1 - 1',
-            'inserted_by'=>1,
-        ]);
-        Provider::create([
-            'complete_name'=>'Provider 1 - 2',
-            'inserted_by'=>1,
-        ]);
-        Provider::create([
-            'complete_name'=>'Provider 2 - 1',
-            'inserted_by'=>2,
-        ]);
-        Provider::create([
-            'complete_name'=>'Provider 2 - 1',
-            'inserted_by'=>2,
-        ]);
+
     }
 }

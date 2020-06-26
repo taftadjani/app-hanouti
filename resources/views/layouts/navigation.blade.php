@@ -86,36 +86,42 @@
                 </div>
                 @auth
                     @if ($auth->carts->count()>0)
-                    <div class="cart">
-                        <a href="@auth
-                                    {{ route('carts.show',['cart'=>$auth->carts[0]->id])}}
-                                @endauth" class="cart-link">
-                            <div class="cart-count">
-                                <span class="cart-logo material-icons">
-                                    shopping_cart
-                                </span>
-                                @auth
-                                    <div class="items-count">
-                                        {{ $auth->carts->count() }}
+                        <div class="cart">
+                            <a href="@auth
+                                        {{ route('carts.show',['cart'=>$auth->carts[0]->id])}}
+                                    @endauth" class="cart-link">
+                                <div class="cart-count">
+                                    <span class="cart-logo material-icons">
+                                        shopping_cart
+                                    </span>
+                                    @auth
+                                        <div class="items-count">
+                                            {{ $auth->carts->count() }}
+                                        </div>
+                                    @endauth
+                                </div>
+                                <span class="cart-title">Cart</span>
+                            </a>
+                            <div class="nav-cart content">
+                                <div class="top-content">
+                                    <span  class="no-selectable-text">Cart</span>
+                                </div>
+                                <div class="bottom-content">
+                                    <div class="cart-products-container">
+                                        @auth
+                                            <a href="{{ route('carts.create')}}">add cart</a><br>
+                                            @if ($auth->carts->count()>1)
+                                                <a href="{{ route('carts.delete.list.show')}}">delete carts</a>
+                                            @endif
+                                        @endauth
+                                        @guest
+                                            Not connected
+                                        @endguest
                                     </div>
-                                @endauth
-                            </div>
-                            <span class="cart-title">Cart</span>
-                        </a>
-                        <div class="nav-cart content">
-                            <div class="top-content">
-                                <span  class="no-selectable-text">Cart</span>
-                            </div>
-                            <div class="bottom-content">
-                                <div class="cart-products-container">
-                                    @guest
-                                        Not connected
-                                    @endguest
                                 </div>
                             </div>
                         </div>
-                    </div>
-                @endif
+                    @endif
                 @endauth
 
                 <div class="hamburger close">

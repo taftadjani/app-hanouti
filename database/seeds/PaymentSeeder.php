@@ -12,32 +12,6 @@ class PaymentSeeder extends Seeder
      */
     public function run()
     {
-        Payment::create([
-            'payment_method_id'=>1,
-            'order_id'=>1,
-            'amount'=>9000,
-            'paids'=>true,
-            'user_id'=>3,
-            'created_at'=>now(),
-            'updated_at'=>now(),
-        ]);
-        Payment::create([
-            'payment_method_id'=>2,
-            'order_id'=>1,
-            'amount'=>1000,
-            'paids'=>false,
-            'user_id'=>3,
-            'created_at'=>now(),
-            'updated_at'=>now(),
-        ]);
-        Payment::create([
-            'payment_method_id'=>2,
-            'order_id'=>1,
-            'amount'=>1000,
-            'paids'=>true,
-            'user_id'=>2,
-            'created_at'=>now(),
-            'updated_at'=>now(),
-        ]);
+
     }
 }

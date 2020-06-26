@@ -1,5 +1,7 @@
 <?php
 
+use App\CartDetail;
+use App\ProductStore;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -12,52 +14,18 @@ class CartDetailSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('cart_details')->insert([
-            [
-                'quantity'=>10,
-                'cart_id'=>1,
-                'product_store_id'=>1,
-                'unit_id'=>3,
-                'price_id'=>1,
+        $faker = Faker\Factory::create();
+        for ($i=0; $i < 10; $i++) {
+            $product_store_id = $faker->numberBetween(1,50);
+            CartDetail::create([
+                'quantity'=>$faker->numberBetween(1,100),
+                'cart_id'=>$faker->numberBetween(1,20),
+                'product_store_id'=>$product_store_id,
+                'unit_id'=>$faker->numberBetween(1,9),
+                'price_id'=>ProductStore::where('id', $product_store_id)->first()->prices[0]->id,
                 'created_at'=>now(),
                 'updated_at'=>now(),
-            ],
-            [
-                'quantity'=>55,
-                'cart_id'=>3,
-                'product_store_id'=>2,
-                'unit_id'=>1,
-                'price_id'=>2,
-                'created_at'=>now(),
-                'updated_at'=>now(),
-            ],
-            [
-                'quantity'=>46,
-                'cart_id'=>2,
-                'product_store_id'=>2,
-                'unit_id'=>2,
-                'price_id'=>1,
-                'created_at'=>now(),
-                'updated_at'=>now(),
-            ],
-            [
-                'quantity'=>90,
-                'cart_id'=>2,
-                'product_store_id'=>3,
-                'unit_id'=>2,
-                'price_id'=>3,
-                'created_at'=>now(),
-                'updated_at'=>now(),
-            ],
-            [
-                'quantity'=>89,
-                'cart_id'=>4,
-                'product_store_id'=>1,
-                'unit_id'=>4,
-                'price_id'=>1,
-                'created_at'=>now(),
-                'updated_at'=>now(),
-            ],
-        ]);
+            ]);
+        }
     }
 }

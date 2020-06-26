@@ -1,8 +1,10 @@
 <div class="container">
     <div class="products-cart">
-        <div class="top-title-4">
-            <h3>{{ $title }}</h3>
-        </div>
+        @if ($title)
+            <div class="top-title-4">
+                <h3>{{ $title }}</h3>
+            </div>
+        @endif
         <section class="products-container">
             @foreach ($products as $product)
                 @if ($product->prices->count()>0)

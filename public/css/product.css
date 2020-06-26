@@ -851,6 +851,7 @@ article.product.content .product.img.container {
 
 /* Start of Rating */
 
+.reviews-star .rating,
 #reviews .rating {
     position: relative;
     unicode-bidi: bidi-override;
@@ -861,6 +862,7 @@ article.product.content .product.img.container {
     width: fit-content;
 }
 
+.reviews-star .rating .rating-upper,
 #reviews .rating-upper {
     position: absolute;
     left: 0;
@@ -871,6 +873,7 @@ article.product.content .product.img.container {
     overflow: hidden;
 }
 
+.reviews-star .rating .rating-lower,
 #reviews .rating-lower {
     display: flex;
     z-index: 0;
@@ -906,6 +909,55 @@ article.product.content .product.img.container {
 
 
 /* End of Rating */
+
+
+/* Start Add review */
+
+#add-review {}
+
+#add-review form {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+#add-review .add-star-container {
+    background-color: var(--color-white-primary);
+    padding: .5rem 1rem;
+    margin-top: 1rem;
+    border-radius: .5rem;
+    -webkit-border-radius: .5rem;
+    -moz-border-radius: .5rem;
+    -ms-border-radius: .5rem;
+    -o-border-radius: .5rem;
+}
+
+#add-review button {
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+}
+
+#add-review button span {
+    pointer-events: none;
+    color: var(--color-black-light);
+    text-shadow: 0px 1px 0 #a2a2a2;
+    transition: 200ms all ease;
+    -webkit-transition: 200ms all ease;
+    -moz-transition: 200ms all ease;
+    -ms-transition: 200ms all ease;
+    -o-transition: 200ms all ease;
+}
+
+#add-review button.active span {
+    color: var(--color-orange-primary);
+}
+
+
+/* End Add review */
 
 
 /* End of details plus  */

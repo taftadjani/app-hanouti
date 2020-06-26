@@ -15,7 +15,7 @@ class CartSeeder extends Seeder
     public function run()
     {
         $faker = Faker\Factory::create();
-        for ($i=0; $i < 50; $i++) {
+        for ($i=0; $i < 10; $i++) {
         Cart::create(
             [
                 'user_id'=>$i+1,
@@ -24,10 +24,10 @@ class CartSeeder extends Seeder
                 'updated_at'=>now(),
             ]);
         }
-        for ($i=0; $i < 300; $i++) {
+        for ($i=0; $i < 10; $i++) {
             Cart::create(
                 [
-                    'user_id'=>$faker->numberBetween(1,50),
+                    'user_id'=>$faker->numberBetween(1,10),
                     'currency_id'=>Currency::where('number',$faker->randomElement([504,950,978,840]))->first()->id,
                     'created_at'=>now(),
                     'updated_at'=>now(),

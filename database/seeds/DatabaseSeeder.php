@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // Level 1
+        $this->call(ProductDetailNameSeeder::class);
         $this->call(CategorySeeder::class);
         $this->call(CurrencySeeder::class);
         $this->call(ConditionSeeder::class);
@@ -19,17 +20,17 @@ class DatabaseSeeder extends Seeder
         $this->call(PaymentMethodSeeder::class);
         $this->call(PrivilegeSeeder::class);
         $this->call(RoleSeeder::class);
-        $this->call(SubCategorySeeder::class);
         $this->call(UnitSeeder::class);
         $this->call(WarningTypeSeeder::class);
+        $this->call(CountrySeeder::class);
 
         // Level 2
-        $this->call(CountrySeeder::class);
+        $this->call(SubCategorySeeder::class);
         $this->call(RolePrivilegeSeeder::class);
+        $this->call(CitySeeder::class);
 
         // Level 3
         $this->call(CategorySubCategorySeeder::class);
-        $this->call(CitySeeder::class);
 
         // Level 4
         $this->call(UserSeeder::class);
@@ -65,8 +66,8 @@ class DatabaseSeeder extends Seeder
         $this->call(CommentSeeder::class);
         $this->call(DiscountSeeder::class);
         $this->call(LocationSeeder::class);
-        $this->call(OrderDetailSeeder::class);
         $this->call(PriceSeeder::class);
+        $this->call(OrderDetailSeeder::class);
         $this->call(ProductStoreDetailSeeder::class);
         $this->call(ProductStoreModeleSeeder::class);
         $this->call(ProductStoreProviderSeeder::class);

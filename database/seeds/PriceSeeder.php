@@ -14,13 +14,13 @@ class PriceSeeder extends Seeder
     public function run()
     {
         $faker = Faker\Factory::create();
-        for ($i=0; $i < 1000; $i++) {
+        for ($i=0; $i < 50; $i++) {
         Price::create([
-                'inserted_by'=>$faker->numberBetween(1,50),
+                'inserted_by'=>$faker->numberBetween(1,10),
                 'product_store_id'=>$i+1,
                 'currency_id'=>$faker->numberBetween(1,4),
                 'unit_id'=>$faker->numberBetween(1,9),
-                'value'=>$faker->numberBetween(1,9999),
+                'value'=>$faker->numberBetween(1,500),
                 'quantity'=>$faker->numberBetween(1,10),
                 'created_at'=>now(),
                 'updated_at'=>now(),

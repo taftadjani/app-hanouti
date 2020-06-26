@@ -13,32 +13,6 @@ class OrderSeeder extends Seeder
      */
     public function run()
     {
-        Order::create([
-            'currency_id'=>Currency::where('number',504)->first()->id,
-            'order_by'=>2,
-            'status'=>'New',
-            'paids'=>0,
-            'delivery_id'=>1,
-            'created_at'=>now(),
-            'updated_at'=>now(),
-        ]);
-        Order::create([
-            'currency_id'=>Currency::where('number',504)->first()->id,
-            'order_by'=>2,
-            'status'=>'New',
-            'paids'=>0,
-            'delivery_id'=>2,
-            'created_at'=>now(),
-            'updated_at'=>now(),
-        ]);
-        Order::create([
-            'currency_id'=>Currency::where('number',504)->first()->id,
-            'order_by'=>3,
-            'status'=>'New',
-            'paids'=>0,
-            'delivery_id'=>4,
-            'created_at'=>now(),
-            'updated_at'=>now(),
-        ]);
+
     }
 }

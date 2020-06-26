@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Role;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,6 +19,20 @@ class UserController extends Controller
     //     $this->middleware('auth');
     // }
 
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function adminIndex()
+    {
+        // The action is authorized...
+
+        // Return list of ProductStore
+        $users = User::all()->take(300);
+        return view('layouts.user.users',['users'=>$users]);
+    }
     /**
      * Display a listing of the resource.
      *

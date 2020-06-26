@@ -200,7 +200,7 @@
             </button>
 
             <button type="submit">
-              <span class="no-selectable-text ">Submit</span>
+              <span class="no-selectable-text ">Save</span>
             </button>
         </div>
 

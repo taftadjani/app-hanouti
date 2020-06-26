@@ -18,7 +18,7 @@ class CreatePaymentsTable extends Migration
             $table->foreignId('payment_method_id')->constrained();
             $table->foreignId('order_id')->constrained();
             $table->decimal('amount', 22,2,true)->default(0);
-            $table->boolean('paids');
+            $table->boolean('paids')->default(0);
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
             $table->softDeletes();

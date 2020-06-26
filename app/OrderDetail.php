@@ -38,7 +38,9 @@ class OrderDetail extends Model
      * @var array
      */
     protected $fillable = [
-        'order_by',
+        'order_id',
+        'unit_id',
+        'price_id',
         'product_store_id',
         'quantity',
         'status',
@@ -81,5 +83,21 @@ class OrderDetail extends Model
     public function productStore()
     {
         return $this->belongsTo('App\ProductStore');
+    }
+
+    /**
+     * Get the ProductStore that owns the OrderDetail.
+     */
+    public function unit()
+    {
+        return $this->belongsTo('App\Unit');
+    }
+
+    /**
+     * Get the ProductStore that owns the OrderDetail.
+     */
+    public function price()
+    {
+        return $this->belongsTo('App\Price');
     }
 }
