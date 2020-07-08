@@ -46,7 +46,8 @@ Route::delete('users/{id}', "ProfileController@destroy")->name('users.destroy');
 Route::get('users/adminIndex', "UserController@adminIndex")->name('users.adminIndex');
 
 Route::post('subscription', function () {
-    return "Store email in subscription";
+
+    return redirect()->route('home');
 })->name('subscribe');
 
 Route::get('/search/result', "SearchController@results")->name('search-result');
@@ -135,6 +136,7 @@ Route::middleware('auth')->get('categories/{category}/edit', "CategoryController
 Route::middleware('auth')->put('categories/{category}', "CategoryController@update")->name('categories.update');
 Route::middleware('auth')->delete('categories/{category}', "CategoryController@destroy")->name('categories.destroy');
 Route::middleware('auth')->get('categories/{category}/restore', "CategoryController@restore")->name('categories.restore');
+Route::get('categories/{id}/products', "CategoryController@products")->name('categories.products');
 
 // City
 Route::get('cities', "CityController@index")->name('cities.index');
@@ -502,7 +504,11 @@ Route::middleware('auth')->get('stars/{star}/restore', "StarController@restore")
 
 // Stores
 Route::get('stores', "StoreController@index")->name('stores.index');
-Route::get('stores/topStores', "StoreController@topStores")->name('stores.topStores');
+Route::get('stores/top', "StoreController@topStores")->name('stores.topStores');
+Route::get('stores/pop', "StoreController@popStores")->name('stores.popStores');
+Route::get('stores/weeks', "StoreController@weeksStores")->name('stores.weeksStores');
+Route::get('stores/around', "StoreController@aroundStores")->name('stores.aroundStores');
+Route::get('stores/new', "StoreController@newStores")->name('stores.newStores');
 
 Route::middleware('auth')->get("stores/create", "StoreController@create")->name('stores.create');
 Route::get("stores/{store}", "StoreController@show")->name('stores.show');
@@ -526,6 +532,7 @@ Route::middleware('auth')->get('subCategories/{subCategory}/edit', "SubCategoryC
 Route::middleware('auth')->put('subCategories/{subCategory}', "SubCategoryController@update")->name('subCategories.update');
 Route::middleware('auth')->delete('subCategories/{subCategory}', "SubCategoryController@destroy")->name('subCategories.destroy');
 Route::middleware('auth')->get('subCategories/{subCategory}/restore', "SubCategoryController@restore")->name('subCategories.restore');
+Route::get('sub/categories/{idCategory}/{idSubCategory}/products', "SubCategoryController@products")->name('sub.categories.products');
 
 // subComments
 Route::resource('subComments', 'SubCommentController')->names(

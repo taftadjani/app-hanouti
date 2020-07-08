@@ -38,9 +38,9 @@ class Delivery extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
-        'symbol',
-        'iso_code',
+        'delivery_mode_id',
+        'description',
+        'delivery_date',
         'user_id',
     ];
 

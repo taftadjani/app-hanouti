@@ -298,7 +298,11 @@ class CartController extends Controller
         if ($response->allowed()){
             $payments = PaymentMethod::all();
             $deliveries = Auth::user()->deliveries;
-            return view('orderInfo' ,compact('cart', 'payments','deliveries'));
+            $deliveryModes = DeliveryMode::all();
+            // if (count($deliveries) == 0) {
+            //     return view('layouts.delivery.create',compact('deliveryModes'));
+            // }
+            return view('orderInfo' ,compact('cart', 'payments','deliveryModes'));
         }
         else{
             echo $response->message();
@@ -318,11 +322,11 @@ class CartController extends Controller
         $request->validate([
             'cart'=>'numeric|required',
             'payment_method'=>'numeric|required',
-            'delivery'=>'numeric|required',
+            'delivery_mode'=>'numeric|required',
         ]);
         $cart = Cart::where('id',$request['cart'])->first();
         $payment_method_id = $request['payment_method'];
-        $delivery_id = $request['delivery'];
+        $delivery_mode_id = $request['delivery_mode'];
         $order_by = Auth::id();
         $response = Gate::inspect('order',$cart);
         if ($response->allowed()){
@@ -332,9 +336,17 @@ class CartController extends Controller
             // Do some cleaning
             $currency_id = Auth::user()->city->country->currency->id;
             // $request['currency_id']=$currency_id;
+
+            $delivery = Delivery::create([
+                'delivery_mode_id'=>$delivery_mode_id,
+                'delivery_date'=>now(),
+                'description'=>"",
+                'user_id'=>$order_by,
+            ]);
+
             $order =Order::create([
                 'currency_id' =>$currency_id,
-                'delivery_id' =>$delivery_id,
+                'delivery_id' =>$delivery->id,
                 'order_by' =>$order_by,
             ]);
             $order_id = $order->id;

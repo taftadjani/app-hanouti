@@ -2,6 +2,8 @@
 const quantity_input = document.querySelector('.quantity.product.info>.value>input');
 const quantity_minus = document.querySelector('.quantity.product.info>.value>button.minus');
 const quantity_plus = document.querySelector('.quantity.product.info>.value>button.plus');
+const selected_img = document.getElementById('img-selected');
+const minis_img = document.querySelectorAll('.mini.img > img');
 
 const add_shopping_cart_form_quantity = document.querySelector('#add_shopping_cart_form> .quantity');
 // console.log(quantity_input);
@@ -48,57 +50,61 @@ const buy_now = document.querySelector('#btn-buy-now');
 
 document.querySelector('body').onload = _ => {
 
-    if (shopping_cart.innerHTML.trim() == '' || shopping_cart.innerHTML == null) {
+    if (shopping_cart && (shopping_cart.innerHTML.trim() == '' || shopping_cart.innerHTML == null)) {
         shopping_cart.innerHTML = 'add_shopping_cart';
     }
 }
 
+if (shopping_cart) {
 
-shopping_cart.onclick = e => {
-    e.preventDefault();
-    // console.log(document.querySelector('#add_shopping_cart_form').action);
-    add_shopping_cart_form_quantity.value = quantity_input.value;
-    const addFormData = new FormData(document.querySelector('#add_shopping_cart_form'));
-    const deleteFormData = new FormData(document.querySelector('#delete_shopping_cart_form'));
-    console.log(add_shopping_cart_form_quantity.value);
+    shopping_cart.onclick = e => {
+        e.preventDefault();
+        // console.log(document.querySelector('#add_shopping_cart_form').action);
+        add_shopping_cart_form_quantity.value = quantity_input.value;
+        const addFormData = new FormData(document.querySelector('#add_shopping_cart_form'));
+        const deleteFormData = new FormData(document.querySelector('#delete_shopping_cart_form'));
+        console.log(add_shopping_cart_form_quantity.value);
 
 
-    if (shopping_cart.innerHTML !== 'add_shopping_cart') {
-        let xhr = new XMLHttpRequest();
-        xhr.onloadend = function() {
-            shopping_cart.innerHTML = 'add_shopping_cart';
-        }
-        xhr.open('POST', document.querySelector('#delete_shopping_cart_form').action, true);
-        xhr.send(deleteFormData);
-    } else {
-        // document.querySelector('#add_shopping_cart_form').submit();
-        let xhr = new XMLHttpRequest();
-        xhr.onloadend = function() {
-            if (this.responseText == "1") {
-                shopping_cart.innerHTML = 'shopping_cart';
+        if (shopping_cart.innerHTML !== 'add_shopping_cart') {
+            let xhr = new XMLHttpRequest();
+            xhr.onloadend = function() {
+                shopping_cart.innerHTML = 'add_shopping_cart';
             }
-            console.log(this.responseText);
+            xhr.open('POST', document.querySelector('#delete_shopping_cart_form').action, true);
+            xhr.send(deleteFormData);
+        } else {
+            // document.querySelector('#add_shopping_cart_form').submit();
+            let xhr = new XMLHttpRequest();
+            xhr.onloadend = function() {
+                if (this.responseText == "1") {
+                    shopping_cart.innerHTML = 'shopping_cart';
+                }
+                console.log(this.responseText);
 
+            }
+            xhr.open('POST', document.querySelector('#add_shopping_cart_form').action, true);
+            xhr.send(addFormData);
+        }
+
+        if (shopping_cart.innerHTML == '' || shopping_cart.innerHTML == null) {
+            shopping_cart.innerHTML == add_shopping_cart;
+        }
+    };
+}
+if (buy_now) {
+
+    buy_now.onclick = e => {
+        e.preventDefault();
+        add_shopping_cart_form_quantity.value = quantity_input.value;
+        const addFormData = new FormData(document.querySelector('#add_shopping_cart_form'));
+        let xhr = new XMLHttpRequest();
+        xhr.onloadend = function() {
+            document.querySelector('#link-buy-now').click();
         }
         xhr.open('POST', document.querySelector('#add_shopping_cart_form').action, true);
         xhr.send(addFormData);
     }
-
-    if (shopping_cart.innerHTML == '' || shopping_cart.innerHTML == null) {
-        shopping_cart.innerHTML == add_shopping_cart;
-    }
-};
-
-buy_now.onclick = e => {
-    e.preventDefault();
-    add_shopping_cart_form_quantity.value = quantity_input.value;
-    const addFormData = new FormData(document.querySelector('#add_shopping_cart_form'));
-    let xhr = new XMLHttpRequest();
-    xhr.onloadend = function() {
-        document.querySelector('#link-buy-now').click();
-    }
-    xhr.open('POST', document.querySelector('#add_shopping_cart_form').action, true);
-    xhr.send(addFormData);
 }
 
 // End of actions on top
@@ -124,3 +130,12 @@ add_stars_btns.forEach(btn => {
     });
 });
 // End of add review
+
+minis_img.forEach(mini_img => {
+    mini_img.addEventListener('click', e => {
+        e.preventDefault();
+        console.log("ok");
+
+        selected_img.src = mini_img.src;
+    });
+});

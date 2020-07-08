@@ -19,6 +19,180 @@ class SubCategoryController extends Controller
         $subCategories = SubCategory::all();
         return $subCategories;
     }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function products($idCategory, $idSubCategory)
+    {
+        $products = [];
+        $categories = [];
+        $subCategories = [];
+        if ($idCategory == 1) {
+            if ($idSubCategory == 1) {
+                $name = "Furnishing and Decoration";
+                $cats[] = 'Furnishing';
+            }
+            if ($idSubCategory == 2) {
+                $name = "Home appliance and tableware";
+                $cats[] = 'Kitchen';
+                $cats[] = 'Home';
+                $cats[] = 'Furnishing';
+                $cats[] = 'Home appliance';
+                $cats[] = 'crockery and cutlery';
+            }
+            if ($idSubCategory == 3) {
+                $name = "Home laundry and Toiletry";
+                $cats[] = 'Cleaning product';
+                $cats[] = 'Toiletry';
+            }
+            if ($idSubCategory == 4) {
+                $name = "Garden and Garage";
+                $cats[] = 'Gardening & field';
+                $cats[] = 'Garage';
+            }
+            if ($idSubCategory == 5) {
+                $name = "Spice and Ingredient";
+                $cats[] = 'Grocery';
+            }
+        }
+        if ($idCategory == 2) {
+            if ($idSubCategory == 1) {
+                $name = "Nutrition and Vitamin";
+                $cats[] = 'Food';
+            }
+            if ($idSubCategory == 2) {
+                $name = "Sport and Well-being";
+                $cats[] = 'Food';
+                $cats[] = 'Sport';
+                $cats[] = 'Kitchen';
+                $cats[] = 'Urban sliding';
+            }
+            if ($idSubCategory == 3) {
+                $name = "Optics and Lens";
+            }
+            if ($idSubCategory == 4) {
+                $name = "MakeUp and Perfume";
+                $cats[] = 'Makeup';
+                $cats[] = 'Hair';
+                $cats[] = 'Beauty';
+            }
+            if ($idSubCategory == 5) {
+                $name = "Fashion and Brilliance";
+                $cats[] = 'Beauty';
+                $cats[] = 'Hair';
+                $cats[] = 'Makeup';
+            }
+        }
+        if ($idCategory == 3) {
+            if ($idSubCategory == 1) {
+                $name = "Phone and Tablet";
+                $cats[] = 'Hardware';
+                $cats[] = 'High-Tech & Gadget';
+            }
+            if ($idSubCategory == 2) {
+                $name = "Camera and Camcorder";
+                $cats[] = 'Software';
+                $cats[] = 'Photgraphy';
+                $cats[] = 'High-Tech & Gadget';
+            }
+            if ($idSubCategory == 3) {
+                $name = "Computer and Device";
+                $cats[] = 'Device';
+                $cats[] = 'Computer science';
+                $cats[] = 'Desktop';
+                $cats[] = 'Hardware';
+                $cats[] = 'High-Tech & Gadget';
+            }
+            if ($idSubCategory == 4) {
+                $name = "Home cinema and TV";
+                $cats[] = 'Hardware';
+                $cats[] = 'Home';
+                $cats[] = 'Desktop';
+                $cats[] = 'High-Tech & Gadget';
+            }
+            if ($idSubCategory == 5) {
+                $name = "Connected object";
+                $cats[] = 'Hardware';
+                $cats[] = 'Electronic';
+                $cats[] = 'Device';
+                $cats[] = 'Computer science';
+                $cats[] = 'High-Tech & Gadget';
+            }
+        }
+        if ($idCategory == 4) {
+            if ($idSubCategory == 1) {
+                $name = "Controller and Video Game";
+                $cats[] = 'Hardware';
+                $cats[] = 'Software';
+                $cats[] = 'Device';
+                $cats[] = 'Game & Toy';
+                $cats[] = 'High-Tech & Gadget';
+            }
+            if ($idSubCategory == 2) {
+                $name = "Consoles and PC gamer";
+                $cats[] = 'Game & Toy';
+                $cats[] = 'High-Tech & Gadget';
+                $cats[] = 'Hardware';
+            }
+            if ($idSubCategory == 3) {
+                $name = "Game & Toy";
+                $cats[] = 'Game & Toy';
+            }
+        }
+        if ($idCategory == 5) {
+            if ($idSubCategory == 1) {
+                $name = "Jewerly & Bags";
+                $cats[] = 'Bag';
+                $cats[] = 'Jewelry';
+            }
+            if ($idSubCategory == 2) {
+                $name = "Fashion men";
+                $cats[] = 'Beauty';
+                $cats[] = 'Hair';
+                $cats[] = 'Bag';
+            }
+            if ($idSubCategory == 3) {
+                $name = "Fashion women";
+                $cats[] = 'Beauty';
+                $cats[] = 'Hair';
+                $cats[] = 'Bag';
+            }
+            if ($idSubCategory == 4) {
+                $name = "Fashion baby";
+                $cats[] = 'Beauty';
+                $cats[] = 'Hair';
+                $cats[] = 'Bag';
+            }
+            if ($idSubCategory == 5) {
+                $name = "Hat & Cap";
+                $cats[] = 'Beauty';
+                $cats[] = 'Hair';
+                $cats[] = 'Bag';
+            }
+        }
+        foreach ($cats as $cat) {
+            $categories[]= Category::where('name', $cat)->first();
+        }
+        foreach ($categories as $category) {
+            foreach ($category->subCategories as $subCategories) {
+                foreach ($subCategories->productStores as $productStore) {
+                    $products[]=$productStore;
+                }
+            }
+        }
+        re_start :
+        foreach ($products as $key => $value) {
+            foreach ($products as $key2 => $value2) {
+                if ($value->id == $value2->id && $key != $key2) {
+                    unset($products[$key2]);
+                    goto re_start;
+                }
+            }
+        }
+        return view('layouts.category.show', ['name'=>$name, 'products'=>$products]);
+    }
 
     /**
      * Show the form for creating a new resource.

@@ -9,6 +9,7 @@ use App\Price;
 use App\Product;
 use App\ProductStore;
 use App\Role;
+use App\Seen;
 use App\Store;
 use App\SubCategory;
 use App\Traits\UploadsPhotos;
@@ -32,7 +33,7 @@ class ProductStoreController extends Controller
         // Return list of ProductStore
         $productStore = ProductStore::all();
 
-        return view('layouts.productStore.index',['products'=>$productStore, 'title'=>'All products']);
+        return view('layouts.productStore.index', ['products' => $productStore, 'title' => 'All products']);
     }
 
     /**
@@ -46,7 +47,7 @@ class ProductStoreController extends Controller
 
         // Return list of ProductStore
         $productStore = ProductStore::all()->take(300);
-        return view('layouts.productStore.adminIndex',['products'=>$productStore]);
+        return view('layouts.productStore.adminIndex', ['products' => $productStore]);
     }
 
     /**
@@ -62,16 +63,16 @@ class ProductStoreController extends Controller
         $productStore = ProductStore::all();
 
         // Logic de popular productshere
-        $products= [];
+        $products = [];
         foreach ($productStore as $product) {
-            $products[]=$product;
-            if (count($products)>=50) {
-            break;
+            $products[] = $product;
+            if (count($products) >= 50) {
+                break;
             }
         }
 
 
-        return view('layouts.productStore.index',['products'=>$products, 'title'=>'Popular products']);
+        return view('layouts.productStore.index', ['products' => $products, 'title' => 'Popular products']);
 
         // $user = Auth::user();
         // return $user->stores->where('id',1)->first() ;
@@ -98,16 +99,18 @@ class ProductStoreController extends Controller
             }
 
             // Show the form here
-            return view('layouts.productStore.create',
-                        [
-                            'stores'=> Auth::user()->stores,
-                            'products'=>Product::all(),
-                            'conditions'=> Condition::all(),
-                            'units'=>Unit::all(),
-                            'currencies'=>Currency::all(),
-                            'categories'=>Category::all(),
-                            'subCategories'=>SubCategory::all(),
-                        ]);
+            return view(
+                'layouts.productStore.create',
+                [
+                    'stores' => Auth::user()->stores,
+                    'products' => Product::all(),
+                    'conditions' => Condition::all(),
+                    'units' => Unit::all(),
+                    'currencies' => Currency::all(),
+                    'categories' => Category::all(),
+                    'subCategories' => SubCategory::all(),
+                ]
+            );
         } else {
             echo $response->message();
         }
@@ -125,25 +128,25 @@ class ProductStoreController extends Controller
         if ($response->allowed()) {
             // The action is authorized...
             $request->validate([
-                'name'=>'bail|required|string|max:255',
-                'reference'=>'bail|required|string|max:255',
-                'description'=>'nullable|string',
-                'keywords'=>'nullable|string',
-                'store_id'=>'bail|required|numeric',
-                'condition_id'=>'bail|required|numeric',
-                'stock_unit_id'=>'bail|required|numeric',
-                'quantity_stock'=>'bail|required|numeric',
-                'category_ids'=>'array|nullable',
-                'sub_category_ids'=>'array|nullable'
-                ]);
+                'name' => 'bail|required|string|max:255',
+                'reference' => 'bail|required|string|max:255',
+                'description' => 'nullable|string',
+                'keywords' => 'nullable|string',
+                'store_id' => 'bail|required|numeric',
+                'condition_id' => 'bail|required|numeric',
+                'stock_unit_id' => 'bail|required|numeric',
+                'quantity_stock' => 'bail|required|numeric',
+                'category_ids' => 'array|nullable',
+                'sub_category_ids' => 'array|nullable'
+            ]);
 
 
             // Validation for price
             $request->validate([
-                'price_value'=>'bail|required|numeric|',
-                'currency_id'=>'bail|required|numeric',
-                'price_quantity'=>'bail|required|numeric',
-                'price_quantity_unit_id'=>'bail|required|numeric',
+                'price_value' => 'bail|required|numeric|',
+                'currency_id' => 'bail|required|numeric',
+                'price_quantity' => 'bail|required|numeric',
+                'price_quantity_unit_id' => 'bail|required|numeric',
             ]);
 
             // Verify if the user have unless one store
@@ -154,14 +157,14 @@ class ProductStoreController extends Controller
 
             // Get related data
             $products = Product::where('reference', $request['reference'])->get();
-            if ( count($products) > 0) {
+            if (count($products) > 0) {
                 $product = $products->first();
-            }else{
+            } else {
                 // Pas de product with this reference
                 if ($request['is_liquid']) {
-                    $product = Product::where('reference',config('app.product.no_ref.liquid'))->first();
-                }else{
-                    $product = Product::where('reference',config('app.product.no_ref.solid'))->first();
+                    $product = Product::where('reference', config('app.product.no_ref.liquid'))->first();
+                } else {
+                    $product = Product::where('reference', config('app.product.no_ref.solid'))->first();
                 }
             }
 
@@ -186,7 +189,7 @@ class ProductStoreController extends Controller
             // Unity of quantity
             if ($request->has('stock_unit_id')) {
                 $units = Unit::where('id', $request['stock_unit_id'])->get();
-                if ( count($units) ==0 ) {
+                if (count($units) == 0) {
                     // Dont have a condition, do something
                     return redirect()->back();
                 }
@@ -195,25 +198,25 @@ class ProductStoreController extends Controller
 
             // Create the product store
             $productStore = ProductStore::create([
-                'inserted_by'=>Auth::user()->id,
-                'store_id'=>$store->id,
-                'product_id'=>$product->id,
-                'condition_id'=>$condition->id,
-                'unit_id'=>$unit->id,
-                'name'=>$request['name'],
+                'inserted_by' => Auth::user()->id,
+                'store_id' => $store->id,
+                'product_id' => $product->id,
+                'condition_id' => $condition->id,
+                'unit_id' => $unit->id,
+                'name' => $request['name'],
             ]);
 
             $productStore_id = $productStore->id;
 
             if ($request->has('images')) {
-                $database_names=[];
+                $database_names = [];
                 $images = $request->file('images');
-                for ($i=0; $i < count($images); $i++) {
-                    $name = $productStore_id.'_'.time().'_'.$images[$i]->getClientOriginalName();
-                    $this->uploadPhoto( $images[$i] ,$name);
-                    $database_names[$i]=$name;
+                for ($i = 0; $i < count($images); $i++) {
+                    $name = $productStore_id . '_' . time() . '_' . $images[$i]->getClientOriginalName();
+                    $this->uploadPhoto($images[$i], $name);
+                    $database_names[$i] = $name;
                 }
-                $productStore->images=json_encode($database_names);
+                $productStore->images = json_encode($database_names);
             }
 
             // Insert other no required value
@@ -246,7 +249,7 @@ class ProductStoreController extends Controller
             // Unity of quantity
             if ($request->has('price_quantity_unit_id')) {
                 $price_units = Unit::where('id', $request['price_quantity_unit_id'])->get();
-                if ( count($price_units) ==0 ) {
+                if (count($price_units) == 0) {
                     // Dont have a condition, do something
                     return redirect()->back();
                 }
@@ -254,12 +257,12 @@ class ProductStoreController extends Controller
             }
             $price = new Price(
                 [
-                    'value'=>$request['price_value'],
-                    'quantity'=>$request['price_quantity'],
-                    'currency_id'=>$store->currency->id,
-                    'unit_id'=>$price_unit->id,
-                    'inserted_by'=>Auth::id(),
-                    'enabled_at'=>now(),
+                    'value' => $request['price_value'],
+                    'quantity' => $request['price_quantity'],
+                    'currency_id' => $store->currency->id,
+                    'unit_id' => $price_unit->id,
+                    'inserted_by' => Auth::id(),
+                    'enabled_at' => now(),
                 ]
             );
             $productStore->prices()->save($price);
@@ -268,11 +271,11 @@ class ProductStoreController extends Controller
             $product_store_sub_categories = [];
             $sub_category_ids = $request['sub_category_ids'];
             foreach ($sub_category_ids as $sub_category_id) {
-                $product_store_sub_categories[]=[
-                    'product_store_id'=> $productStore->id,
-                    'sub_category_id'=>$sub_category_id,
-                    'created_at'=>now(),
-                    'updated_at'=>now(),
+                $product_store_sub_categories[] = [
+                    'product_store_id' => $productStore->id,
+                    'sub_category_id' => $sub_category_id,
+                    'created_at' => now(),
+                    'updated_at' => now(),
                 ];
             }
             DB::table('product_store_sub_category')->insert(
@@ -282,13 +285,13 @@ class ProductStoreController extends Controller
             // Details
             $product_store_details = [];
             if ($request->has('details_number')) {
-                for ($i=1; $i <= $request['details_number']; $i++) {
-                    $product_store_details[]=[
-                        'product_store_id'=>$productStore->id,
-                        'name'=>$request['detail_name_'.$i],
-                        'content_value'=>$request['detail_value_'.$i],
-                        'created_at'=>now(),
-                        'updated_at'=>now(),
+                for ($i = 1; $i <= $request['details_number']; $i++) {
+                    $product_store_details[] = [
+                        'product_store_id' => $productStore->id,
+                        'name' => $request['detail_name_' . $i],
+                        'content_value' => $request['detail_value_' . $i],
+                        'created_at' => now(),
+                        'updated_at' => now(),
                     ];
                 }
             }
@@ -307,36 +310,45 @@ class ProductStoreController extends Controller
 
     /**
      * Display the specified resource.
-     *
+   N  *
      * @param  \App\ProductStore  $productStore
      * @return \Illuminate\Http\Response
      */
     public function show(ProductStore $productStore)
     {
+        if (Auth::check()) {
+            Seen::create([
+                'seenable_id' => $productStore->id,
+                'seenable_type' => 'product_store',
+                'user_id' => Auth::id()
+            ]);
+        }
         $star_value = 0;
         foreach ($productStore->stars as $star) {
-            if ($star->inserted_by ==Auth::id()) {
+            if ($star->inserted_by == Auth::id()) {
                 $star_value = $star->value;
-            break;
+                break;
             }
         }
         $percentage = 0;
         $value = 0;
         $max_value = 0;
         foreach ($productStore->stars as $star) {
-            $value +=$star->value;
-            $max_value+=5;
+            $value += $star->value;
+            $max_value += 5;
         }
-        if (!($max_value ==0)) {
-            $percentage = $value/$max_value;
+        if (!($max_value == 0)) {
+            $percentage = $value / $max_value;
         }
-        return view('layouts.productStore.show',
-                                    [
-                                        'product'=>$productStore,
-                                        "auth"=>Auth::user(),
-                                        'star_value'=>$star_value,
-                                        'percentage_star'=>$percentage*100
-                                    ]);
+        return view(
+            'layouts.productStore.show',
+            [
+                'product' => $productStore,
+                "auth" => Auth::user(),
+                'star_value' => $star_value,
+                'percentage_star' => $percentage * 100
+            ]
+        );
     }
 
     /**
@@ -350,17 +362,20 @@ class ProductStoreController extends Controller
         $response = Gate::inspect('update', $productStore);
         if ($response->allowed()) {
             // The action is authorized...
-            return view('layouts.productStore.edit',
-                ['productStore'=>$productStore,
-                    'stores'=> Auth::user()->stores,
-                    'products'=>Product::all(),
-                    'conditions'=> Condition::all(),
-                    'units'=>Unit::all(),
-                    'currencies'=>Currency::all(),
-                    'categories'=>Category::all(),
-                    'subCategories'=>SubCategory::all(),
-                ]);
-        }else {
+            return view(
+                'layouts.productStore.edit',
+                [
+                    'productStore' => $productStore,
+                    'stores' => Auth::user()->stores,
+                    'products' => Product::all(),
+                    'conditions' => Condition::all(),
+                    'units' => Unit::all(),
+                    'currencies' => Currency::all(),
+                    'categories' => Category::all(),
+                    'subCategories' => SubCategory::all(),
+                ]
+            );
+        } else {
             echo $response->message();
         }
     }
@@ -378,26 +393,26 @@ class ProductStoreController extends Controller
         if ($response->allowed()) {
             // The action is authorized...
             $request->validate([
-                'reference'=>'nullable|string|max:255',
-                'store_id'=>'nullable|numeric',
-                'condition_id'=>'nullable|numeric',
-                'stock_unit_id'=>'nullable|numeric',
-                'images'=>'nullable|string',
-                'name'=>'nullable|string|max:255',
-                'description'=>'nullable|string',
-                'keywords'=>'nullable|string',
-                'quantity_stock'=>'nullable|numeric',
-                'negociable'=>'nullable|boolean',
-                'visible_on_store'=>'nullable|boolean',
-                'have_return'=>'nullable|boolean',
-                'category_ids'=>'json|nullable',
-                'sub_category_ids'=>'json|nullable'
+                'reference' => 'nullable|string|max:255',
+                'store_id' => 'nullable|numeric',
+                'condition_id' => 'nullable|numeric',
+                'stock_unit_id' => 'nullable|numeric',
+                'images' => 'nullable|string',
+                'name' => 'nullable|string|max:255',
+                'description' => 'nullable|string',
+                'keywords' => 'nullable|string',
+                'quantity_stock' => 'nullable|numeric',
+                'negociable' => 'nullable|boolean',
+                'visible_on_store' => 'nullable|boolean',
+                'have_return' => 'nullable|boolean',
+                'category_ids' => 'json|nullable',
+                'sub_category_ids' => 'json|nullable'
             ]);
 
             // Verify if the user have unless one store
             if (count(Auth::user()->stores) == 0) {
                 // Dont have any store Do something
-                return ;
+                return;
             }
 
             // Get related data
@@ -408,7 +423,7 @@ class ProductStoreController extends Controller
                 }
             }
             if ($request->has('store_id') && $request['store_id']) {
-                $store =Auth::user()->stores->where('id',$request['store_id'])->first();
+                $store = Auth::user()->stores->where('id', $request['store_id'])->first();
                 if ($store != null) {
                     // Dont have a store, do something
                     $productStore->stores()->save($store);
@@ -433,18 +448,18 @@ class ProductStoreController extends Controller
 
             $productStore_id = $productStore->id;
             if ($request->has('images') && $request['images']) {
-                $database_names=[];
+                $database_names = [];
                 $images = $request->file('images');
-                for ($i=0; $i < count($images); $i++) {
-                    $name = $productStore_id.'_'.time().'_'.$images[$i]->getClientOriginalName();
-                    $this->uploadPhoto( $images[$i] ,$name);
-                    $database_names[$i]=$name;
+                for ($i = 0; $i < count($images); $i++) {
+                    $name = $productStore_id . '_' . time() . '_' . $images[$i]->getClientOriginalName();
+                    $this->uploadPhoto($images[$i], $name);
+                    $database_names[$i] = $name;
                 }
-                $productStore->images=json_encode($database_names);
+                $productStore->images = json_encode($database_names);
             }
 
             if ($request->has('name') && $request['name']) {
-                $productStore->name=$request['name'];
+                $productStore->name = $request['name'];
             }
             if ($request->has('quantity_stock') && $request['quantity_stock']) {
                 $productStore->quantity_stock = $request['quantity_stock'];
@@ -469,11 +484,11 @@ class ProductStoreController extends Controller
             $product_store_sub_categories = [];
             $sub_category_ids = $request['sub_category_ids'];
             foreach ($sub_category_ids as $sub_category_id) {
-                $product_store_sub_categories[]=[
-                    'product_store_id'=> $productStore->id,
-                    'sub_category_id'=>$sub_category_id,
-                    'created_at'=>now(),
-                    'updated_at'=>now(),
+                $product_store_sub_categories[] = [
+                    'product_store_id' => $productStore->id,
+                    'sub_category_id' => $sub_category_id,
+                    'created_at' => now(),
+                    'updated_at' => now(),
                 ];
             }
             DB::table('product_store_sub_category')->insert(
@@ -483,13 +498,13 @@ class ProductStoreController extends Controller
             // Details
             $product_store_details = [];
             if ($request->has('details_number')) {
-                for ($i=0; $i < $request['details_number']; $i++) {
-                    $product_store_details[]=[
-                        'product_store_id'=>$productStore->id,
-                        'name'=>$request['detail_name_'.$i],
-                        'content_value'=>$request['detail_value_'.$i],
-                        'created_at'=>now(),
-                        'updated_at'=>now(),
+                for ($i = 0; $i < $request['details_number']; $i++) {
+                    $product_store_details[] = [
+                        'product_store_id' => $productStore->id,
+                        'name' => $request['detail_name_' . $i],
+                        'content_value' => $request['detail_value_' . $i],
+                        'created_at' => now(),
+                        'updated_at' => now(),
                     ];
                 }
             }
@@ -502,8 +517,7 @@ class ProductStoreController extends Controller
 
             // Return to show method with a success message
             return $this->show($productStore);
-
-        }else {
+        } else {
             echo $response->message();
         }
     }
@@ -517,11 +531,11 @@ class ProductStoreController extends Controller
     public function destroy(ProductStore $productStore)
     {
         $response = Gate::inspect('delete', $productStore);
-        if ($response->allowed()){
+        if ($response->allowed()) {
             $productStore->delete();
             // Return to dashboard with a message
             return redirect()->route('home');
-        }else{
+        } else {
             echo $response->message();
         }
     }
@@ -534,12 +548,12 @@ class ProductStoreController extends Controller
      */
     public function forceDelete(ProductStore $productStore)
     {
-        $response = Gate::inspect('forceDelete',$productStore);
-        if ($response->allowed()){
+        $response = Gate::inspect('forceDelete', $productStore);
+        if ($response->allowed()) {
             $productStore->forceDelete();
             // Return to dashboard with a message
             return;
-        }else{
+        } else {
             echo $response->message();
         }
     }
@@ -551,15 +565,14 @@ class ProductStoreController extends Controller
      * @param  \App\Product  $product
      * @return mixed
      */
-    public function restore( $id)
+    public function restore($id)
     {
         $productStore = ProductStore::withTrashed()->find($id);
         $response = Gate::inspect('restore', $productStore);
-        if ($response->allowed()){
+        if ($response->allowed()) {
             // Do some restore
             $productStore->restore();
-        }
-        else{
+        } else {
             echo $response->message();
         }
     }

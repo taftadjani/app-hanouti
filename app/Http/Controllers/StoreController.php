@@ -34,6 +34,47 @@ class StoreController extends Controller
         $stores=Store::simplePaginate(15);
         return view('layouts.store.index',['stores'=>$stores, 'title'=>"All stores"]);
     }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function popStores()
+    {
+        // return "mmm";
+        $stores=Store::simplePaginate(15);
+        return view('layouts.store.index',['stores'=>$stores, 'title'=>"Populars stores"]);
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function weeksStores()
+    {
+        $stores=Store::simplePaginate(15);
+        return view('layouts.store.index',['stores'=>$stores, 'title'=>"Stores of the week"]);
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function aroundStores()
+    {
+        $stores=Store::simplePaginate(15);
+        return view('layouts.store.index',['stores'=>$stores, 'title'=>"Stores around"]);
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function newStores()
+    {
+        $stores=Store::simplePaginate(15);
+        return view('layouts.store.index',['stores'=>$stores, 'title'=>"New stores"]);
+    }
 
 
     /**
@@ -43,7 +84,7 @@ class StoreController extends Controller
      */
     public function topStores()
     {
-        $stores=Store::all()->take(25);
+        $stores=Store::simplePaginate(15);
         return view('layouts.store.index',['stores'=>$stores, 'title'=>"Top stores"]);
     }
 

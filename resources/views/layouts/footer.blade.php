@@ -31,7 +31,7 @@
                     <a href="{{ route('stores.index') }}">Stores</a>
                     <a href="{{ route('maps.stores') }}">Map</a>
                     @auth
-                        <a href="#">Local stores</a>
+                        <a href="{{ route('stores.aroundStores') }}">Local stores</a>
                     @endauth
                     <a href="{{ route('categories.index') }}">Categories</a>
                     <a href="#">Sales off</a>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Cart;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
@@ -99,6 +100,13 @@ class RegisterController extends Controller
         if ($role && $user) {
             $user->roles()->attach($role->id);
         }
+
+        // Giving a Cart
+        Cart::create([
+            'name'=>'Cart',
+            'user_id'=>$user->id,
+            'currency_id'=>1
+        ]);
     }
 
     /**

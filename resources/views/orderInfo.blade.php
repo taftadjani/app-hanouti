@@ -171,15 +171,15 @@
                              </select>
                          </div>
                    </div>
-                   @if ($deliveries->count()>0)
+                    @if ($deliveryModes->count()>0)
                         <div class="col">
                             <div class="title">
-                                <span>Delivery</span>
+                                <span>Delivery modes</span>
                             </div>
                             <div class="value">
-                                <select name="delivery">
-                                    @foreach ($deliveries as $delivery)
-                                        <option value="{{ $delivery->id }}">{{ $delivery->description ?? $delivery->deliveryMode->name }}</option>
+                                <select name="delivery_mode">
+                                    @foreach ($deliveryModes as $deliveryMode)
+                                        <option value="{{ $deliveryMode->id }}">{{ $deliveryMode->name }}</option>
                                     @endforeach
                                 </select>
                             </div>

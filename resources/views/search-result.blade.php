@@ -81,6 +81,8 @@
 
     {{--  Including productcontainer Style --}}
     <link rel="stylesheet" href="{{asset('css/product-container.css')}}">
+    {{--  Including stores style --}}
+    <link rel="stylesheet" href="{{asset('css/stores.css')}}">
 @endsection
 
 @section('main-content')
@@ -101,8 +103,16 @@
     </div>
 
     {{--  Including Product container 1 Content --}}
-    @if (count($products)>0)
-        @include('layouts.product-container-1',['products'=>$products, 'title'=> "Products"])
+    @if ($products->count()>0)
+        @if (count($products)>0)
+            @include('layouts.product-container-1',['products'=>$products, 'title'=> "Products"])
+        @endif
+    @endif
+
+    @if ($stores->count()>0)
+    {{--  Including stores Content --}}
+    @include('layouts.store.stores',['title'=>"Stores", 'stores'=>$stores])
+
     @endif
 @endsection
 
@@ -133,4 +143,6 @@
     </script>
     {{--  Including product-container Scripts --}}
     <script src="{{asset('js/product-container.js')}}"></script>
+    {{--  Including stores Scripts --}}
+    <script src="{{asset('js/stores.js')}}"></script>
 @endsection

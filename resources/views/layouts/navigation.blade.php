@@ -155,51 +155,51 @@
                     </a>
                     <ul class="menu-sublist">
                         <li>
-                            <a href="#">Home and kitchen</a>
+                            <a href="{{ route('categories.products', ['id'=>1]) }}">Home and kitchen</a>
                             <ul class="menu-sublist">
-                                <li><a href="#">Furnishing and Decoration</a></li>
-                                <li><a href="#">Home appliance and Tableware</a></li>
-                                <li><a href="#">Home laundry and Toiletry</a></li>
-                                <li><a href="#">Garden and Garage</a></li>
-                                <li><a href="#">Spice and Ingredient</a></li>
+                                <li><a href="{{ route('sub.categories.products', ['idCategory'=>1, 'idSubCategory'=>1]) }}">Furnishing and Decoration</a></li>
+                                <li><a href="{{ route('sub.categories.products', ['idCategory'=>1, 'idSubCategory'=>2]) }}">Home appliance and Tableware</a></li>
+                                <li><a href="{{ route('sub.categories.products', ['idCategory'=>1, 'idSubCategory'=>3]) }}">Home laundry and Toiletry</a></li>
+                                <li><a href="{{ route('sub.categories.products', ['idCategory'=>1, 'idSubCategory'=>4]) }}">Garden and Garage</a></li>
+                                <li><a href="{{ route('sub.categories.products', ['idCategory'=>1, 'idSubCategory'=>5]) }}">Spice and Ingredient</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a href="#">Beauty and health</a>
+                            <a href="{{ route('categories.products', ['id'=>2]) }}">Beauty and health</a>
                             <ul class="menu-sublist">
-                                <li><a href="#">Nutrition and Vitamin</a></li>
-                                <li><a href="#">Sport and Well-being</a></li>
-                                <li><a href="#">Optics and lens</a></li>
-                                <li><a href="#">Makeup and Perfume</a></li>
-                                <li><a href="#">Fashion and Brilliance</a></li>
+                                <li><a href="{{ route('sub.categories.products', ['idCategory'=>2, 'idSubCategory'=>1]) }}">Nutrition and Vitamin</a></li>
+                                <li><a href="{{ route('sub.categories.products', ['idCategory'=>2, 'idSubCategory'=>2]) }}">Sport and Well-being</a></li>
+                                <li><a href="{{ route('sub.categories.products', ['idCategory'=>2, 'idSubCategory'=>3]) }}">Optics and lens</a></li>
+                                <li><a href="{{ route('sub.categories.products', ['idCategory'=>2, 'idSubCategory'=>4]) }}">Makeup and Perfume</a></li>
+                                <li><a href="{{ route('sub.categories.products', ['idCategory'=>2, 'idSubCategory'=>5]) }}">Fashion and Brilliance</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a href="#">High-tech and gadget</a>
+                            <a href="{{ route('categories.products', ['id'=>3]) }}">High-tech and gadget</a>
                             <ul class="menu-sublist">
-                                <li><a href="#">Phone and Tablet</a></li>
-                                <li><a href="#">Camera and Camcorder</a></li>
-                                <li><a href="#">Computer and Device</a></li>
-                                <li><a href="#">Home cinema and TV</a></li>
-                                <li><a href="#">Connected object</a></li>
+                                <li><a href="{{ route('sub.categories.products', ['idCategory'=>3, 'idSubCategory'=>1]) }}">Phone and Tablet</a></li>
+                                <li><a href="{{ route('sub.categories.products', ['idCategory'=>3, 'idSubCategory'=>2]) }}">Camera and Camcorder</a></li>
+                                <li><a href="{{ route('sub.categories.products', ['idCategory'=>3, 'idSubCategory'=>3]) }}">Computer and Device</a></li>
+                                <li><a href="{{ route('sub.categories.products', ['idCategory'=>3, 'idSubCategory'=>4]) }}">Home cinema and TV</a></li>
+                                <li><a href="{{ route('sub.categories.products', ['idCategory'=>3, 'idSubCategory'=>5]) }}">Connected object</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a href="#">Game and Console</a>
+                            <a href="{{ route('categories.products', ['id'=>4]) }}">Game and Console</a>
                             <ul class="menu-sublist">
-                                <li><a href="#">Controller & Video game</a></li>
-                                <li><a href="#">Consoles & PC gamer</a></li>
-                                <li><a href="#">Game & Toy</a></li>
+                                <li><a href="{{ route('sub.categories.products', ['idCategory'=>4, 'idSubCategory'=>1]) }}">Controller & Video game</a></li>
+                                <li><a href="{{ route('sub.categories.products', ['idCategory'=>4, 'idSubCategory'=>2]) }}">Consoles & PC gamer</a></li>
+                                <li><a href="{{ route('sub.categories.products', ['idCategory'=>4, 'idSubCategory'=>3]) }}">Game & Toy</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a href="#">Clothing, Footwear and Jewerly</a>
+                            <a href="{{ route('categories.products', ['id'=>5]) }}">Clothing, Footwear and Jewerly</a>
                             <ul class="menu-sublist">
-                                <li><a href="#">Jewelry & Bags</a></li>
-                                <li><a href="#">Fashion men</a></li>
-                                <li><a href="#">Fashion women</a></li>
-                                <li><a href="#">Fashion baby</a></li>
-                                <li><a href="#">Hat & Cap</a></li>
+                                <li><a href="{{ route('sub.categories.products', ['idCategory'=>5, 'idSubCategory'=>1]) }}">Jewelry & Bags</a></li>
+                                <li><a href="{{ route('sub.categories.products', ['idCategory'=>5, 'idSubCategory'=>2]) }}">Fashion men</a></li>
+                                <li><a href="{{ route('sub.categories.products', ['idCategory'=>5, 'idSubCategory'=>3]) }}">Fashion women</a></li>
+                                <li><a href="{{ route('sub.categories.products', ['idCategory'=>5, 'idSubCategory'=>4]) }}">Fashion baby</a></li>
+                                <li><a href="{{ route('sub.categories.products', ['idCategory'=>5, 'idSubCategory'=>5]) }}">Hat & Cap</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -208,10 +208,10 @@
                     <a href="{{ route('stores.index') }}">Stores</a>
                     <ul class="menu-sublist">
                         <li><a href="{{ route('stores.topStores') }}">Top stores</a></li>
-                        <li><a href="#">Populars stores</a></li>
-                        <li><a href="#">Stores of the week</a></li>
-                        <li><a href="#">Stores around</a></li>
-                        <li><a href="#">New stores</a></li>
+                        <li><a href="{{ route('stores.popStores') }}">Populars stores</a></li>
+                        <li><a href="{{ route('stores.weeksStores') }}">Stores of the week</a></li>
+                        <li><a href="{{ route('stores.aroundStores') }}">Stores around</a></li>
+                        <li><a href="{{ route('stores.newStores') }}">New stores</a></li>
                     </ul>
                 </li>
                 <li>

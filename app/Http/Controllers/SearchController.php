@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ProductStore;
+use App\Store;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
@@ -15,14 +16,21 @@ class SearchController extends Controller
     public function results(Request $request)
     {
         $request->validate([
-            'data'=>"bail|string|required|min:1"
+            'data' => "bail|string|required|min:1"
         ]);
         $data = $request['data'];
         $products = ProductStore::where('name', 'LIKE', "%{$data}%")
-                                ->orWhere('description', 'LIKE', "%{$data}%")
-                                ->orWhere('keywords', 'LIKE', "%{$data}%")
-                                ->get();
-        return view('search-result',['products'=>$products, 'data'=>$data]);
+            ->orWhere('description', 'LIKE', "%{$data}%")
+            ->orWhere('keywords', 'LIKE', "%{$data}%")
+            ->get();
+        $stores = Store::where('name', 'LIKE', "%{$data}%")
+            ->orWhere('description', 'LIKE', "%{$data}%")
+            ->orWhere('keywords', 'LIKE', "%{$data}%")
+            ->get();
+        if ($products->count() <= 0 && $stores->count() <= 0) {
+            return redirect()->back();
+        }
+        return view('search-result', compact('products', 'data', 'stores'));
     }
 
     /**

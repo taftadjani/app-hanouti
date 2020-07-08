@@ -1,15 +1,15 @@
 <div class="container">
     <section class="product wrapper">
         <div class="category belong no-selectable-text">
-            <span class="store name">Store name</span>
-            <div class="dots">
+            <span class="store name">{{ $product->store->name }}</span>
+            {{--  <div class="dots">
                 <div class="dot"></div>
                 <div class="dot"></div>
                 <div class="dot"></div>
             </div>
             <span>Category</span>
             <span class="material-icons">keyboard_arrow_right</span>
-            <span class="">Sub category</span>
+            <span class="">{{ $product->product-> }}</span>  --}}
         </div>
         <article class="product content">
             <div class="product img container">
@@ -32,17 +32,17 @@
                         </div>
                     @endif
                 </div>
-                <div class="img selected " @if (($product->images!= null && count(json_decode($product->images))<=0) || $product->images == null)
+                <div class="img selected" @if (($product->images!= null && count(json_decode($product->images))<=0) || $product->images == null)
                     style="background-color:red;"
                 @endif>
                     @if (($product->images != null && count(json_decode($product->images))>0))
-                        <img src="{{ url('/uploads/images/'.json_decode($product->images)[0]) }}" alt="No photo"/>
+                        <img src="{{ url('/uploads/images/'.json_decode($product->images)[0]) }}" alt="No photo" id="img-selected"/>
                     @endif
                 </div>
                 <div class="img actions details">
                     <div class="views no-selectable-text">
                         <span class="material-icons">remove_red_eye</span>
-                        <span>50 views</span>
+                        <span>{{ $product->seens->count() }} views</span>
                     </div>
                     <div class="right">
                         <a href="#" class="material-icons share">share</a>

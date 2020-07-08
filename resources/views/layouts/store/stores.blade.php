@@ -10,6 +10,6 @@
             @endforeach
         </div>
     </div>
-    {{ $stores->links()}}
+    {{--  {{ $stores->links()}}  --}}
     <!-- END STORES -->
 </div>

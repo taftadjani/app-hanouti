@@ -3,7 +3,7 @@
 @extends('layouts.app-hanouti')
 
 @section('title-page')
-{{ $category->name }}
+{{ $name }}
 @endsection
 
 @section('links')
@@ -24,7 +24,7 @@
 
     {{--  Including Product container 1 Content --}}
     @if (count($products)>0)
-        @include('layouts.product-container-2',['products'=>$products, 'title'=> $category->name ])
+        @include('layouts.product-container-2',['products'=>$products, 'title'=> $name ])
     @endif
 
 @endsection

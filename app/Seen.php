@@ -39,7 +39,6 @@ class Seen extends Model
      */
     protected $fillable = [
         'user_id',
-        'inserted_by',
         'seenable_id',
         'seenable_type',
     ];

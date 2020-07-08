@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>
-    @yield('title-page')
+        @yield('title-page')
     </title>
 
     <!-- Links -->
+    <link rel="icon" type="image/x-icon" href="{{ url('/favicon/favicon.ico') }}">
     <link rel="stylesheet" href="{{ asset('material-icon/css/material-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style-default.css') }}">
     @yield('links')
