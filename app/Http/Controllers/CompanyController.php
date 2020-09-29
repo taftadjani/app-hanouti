@@ -75,7 +75,7 @@ class CompanyController extends Controller
             );
 
             // Do something after creating company
-            return $this->show($company);
+            return redirect()->route('home');
         }else {
             echo $response->message();
         }

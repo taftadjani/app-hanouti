@@ -31,7 +31,7 @@ class StoreController extends Controller
      */
     public function index()
     {
-        $stores=Store::simplePaginate(15);
+        $stores=Store::all();
         return view('layouts.store.index',['stores'=>$stores, 'title'=>"All stores"]);
     }
     /**
@@ -95,17 +95,17 @@ class StoreController extends Controller
      */
     public function create()
     {
-        $seller_role = Role::where('reference', config('app.role.seller'))->first();
+        $client_role = Role::where('reference', config('app.role.client'))->first();
 
         $user = Auth::user();
         if ( count($user->roles)<1) {
             // The user doesn't have any role
-            $user->roles()->attach($seller_role);
+            $user->roles()->attach($client_role);
         }
-        if (!($user->isSeller() || $user->isAdmin()) ) {
-            // authenticated and not seller and not admin : upgrade him as a seller
-            $user->roles()->attach($seller_role);
-        }
+        // if (!($user->isSeller() || $user->isAdmin()) ) {
+        //     // authenticated and not seller and not admin : upgrade him as a seller
+        //     $user->roles()->attach($seller_role);
+        // }
 
         $response = Gate::inspect('create', Store::class);
         if ($response->allowed()) {
@@ -165,8 +165,8 @@ class StoreController extends Controller
             ]);
 
             // Inserrting the rest of data
-            if($request->has('cover_photo')){
-                $cover = $request->file('cover_photo');
+            if($request->has('cover')){
+                $cover = $request->file('cover');
                 $name = $store->id.'_'.time().'_'.$cover->getClientOriginalName();
                 $this->uploadPhoto( $cover,$name);
                 $store['cover']=$name;

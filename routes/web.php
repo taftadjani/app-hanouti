@@ -643,6 +643,11 @@ Route::get('connected/user', function () {
     return Auth::user()->haveAccess('clear-cart');
 })->middleware('auth');
 
+
+Route::get('connected', function () {
+    // return Auth::user()->role()->privileges;
+    return Auth::user();
+})->middleware('auth');
 // Users
 Route::get('users/stores', "UserController@myStores");
 Route::get('users/companies', "UserController@myCompanies");

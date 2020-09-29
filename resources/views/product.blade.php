@@ -97,7 +97,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="count">33 customers reviews</div>
+                        <div class="count">{{ $product->stars->count() }} customers reviews</div>
                     </div>
                     <div class="stock no-selectable-text"><span>In Stock</span></div>
                 </div>
